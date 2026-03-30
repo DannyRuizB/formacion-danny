@@ -22,9 +22,26 @@
 7. Automatizacion y documentacion
 8. Proyecto final
 ## Progreso Semana 1
+
 - [x] Entorno configurado y acceso SSH al servidor
 - [x] Ejercicio 1.1: Gestion de usuarios y grupos
 - [x] Ejercicio 1.2: Procesos y servicios (Nginx) - hecho en local
-
 - [x] Ejercicio 1.3: Repositorio Git
-- [ ] Ejercicio 1.4: Exploracion de herramientas de Zataca
+- [ ] Ejercicio 1.4: Exploracion de herramientas de Zataca (pendiente acceso)
+
+## Progreso Semana 2
+
+- [x] Instalacion Debian 12 en Proxmox
+- [x] Configuracion de red (IP estatica en VM debian13)
+- [x] SSH en profundidad (claves, config, securizacion)
+- [x] Cron y tareas programadas (script backup-disk-usage.sh)
+- [ ] Instalar Nginx en VM (pendiente internet)
+- [ ] Tuneles SSH (pendiente Nginx)
+
+## Pendiente (requiere internet en el servidor)
+
+- Instalar openssh-server en la VM debian13
+- Instalar Nginx en la VM
+- Ejercicio de tuneles SSH
+- Ejercicio 1.2 en el servidor (repetir)
+- Resolver DNS
