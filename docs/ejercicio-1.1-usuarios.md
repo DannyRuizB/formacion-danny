@@ -48,6 +48,12 @@ $ ls -la / | grep proyecto
 drwxrwxr-x   2 root backend       4096 mar 30 08:39 proyecto
 ```
 
+## Capturas
+
+![Verificacion de usuarios con id](img/ejercicio-1.1-id-usuarios.png)
+
+![Permisos del directorio /proyecto](img/ejercicio-1.1-permisos-proyecto.png)
+
 ## Resultado
 - webadmin esta en el grupo frontend
 - dbadmin esta en el grupo backend

@@ -51,6 +51,14 @@ mar 30 08:45:59 danny systemd[1]: Stopped nginx.service
 mar 30 08:47:12 danny systemd[1]: Started nginx.service
 ```
 
+## Capturas
+
+![Nginx activo con systemctl status](img/ejercicio-1.2-nginx-running.png)
+
+![Nginx parado y curl fallando](img/ejercicio-1.2-nginx-stopped.png)
+
+![Logs de Nginx con journalctl](img/ejercicio-1.2-nginx-logs.png)
+
 ## Resultado
 - Nginx se instalo correctamente
 - Se verifico que el servicio se puede parar y arrancar con systemctl
