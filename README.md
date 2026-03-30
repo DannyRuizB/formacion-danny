@@ -21,3 +21,10 @@
 6. Seguridad
 7. Automatizacion y documentacion
 8. Proyecto final
+## Progreso Semana 1
+- [x] Entorno configurado y acceso SSH al servidor
+- [x] Ejercicio 1.1: Gestion de usuarios y grupos
+- [x] Ejercicio 1.2: Procesos y servicios (Nginx) - hecho en local
+
+- [x] Ejercicio 1.3: Repositorio Git
+- [ ] Ejercicio 1.4: Exploracion de herramientas de Zataca
