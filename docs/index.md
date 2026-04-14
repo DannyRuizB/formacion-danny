@@ -44,3 +44,4 @@
 |----------|-------------|
 | [Wiki de documentacion](extra-wiki.md) | Esta misma web, generada con MkDocs y servida por Nginx |
 | [Dashboard de monitorizacion](extra-dashboard.md) | Panel web en tiempo real con estado del servidor |
+| [Script de despliegue wiki](extra-deploy-wiki.md) | Desplegar la wiki con un solo comando: `wiki` |

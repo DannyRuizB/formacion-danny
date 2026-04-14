@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+
+SERVIDOR="soltecsis@10.160.218.20"
+REPO_DIR="/home/danny/formacion-danny"
+REMOTE_PATH="/var/www/wiki"
+
+echo "=== Desplegando wiki ==="
+
+echo "[1/3] Generando sitio con mkdocs..."
+cd "$REPO_DIR"
+mkdocs build --quiet
+
+echo "[2/3] Subiendo al servidor..."
+scp -r site/ "$SERVIDOR:/tmp/wiki"
+
+echo "[3/3] Activando en Nginx..."
+ssh "$SERVIDOR" "sudo rm -rf $REMOTE_PATH && sudo mv /tmp/wiki $REMOTE_PATH"
+
+echo "=== Wiki desplegada en http://wiki.practicas.local ==="

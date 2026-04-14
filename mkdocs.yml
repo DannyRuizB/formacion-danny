@@ -40,6 +40,7 @@ nav:
   - Extras:
     - Wiki de documentacion: extra-wiki.md
     - Dashboard de monitorizacion: extra-dashboard.md
+    - Script despliegue wiki: extra-deploy-wiki.md
 
 markdown_extensions:
   - tables
