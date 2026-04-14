@@ -1,0 +1,49 @@
+site_name: Formacion FCT - Danny Ruiz Boluda
+site_description: Documentacion del curso FCT en Zataca Systems
+site_author: Danny Ruiz Boluda
+
+theme:
+  name: material
+  language: es
+  palette:
+    primary: blue grey
+    accent: teal
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+
+nav:
+  - Inicio: index.md
+  - Modulo 1 - Introduccion:
+    - Resumen: resumen-semana1.md
+    - Entregable dia 1: entregable-semana1-lunes.md
+    - 1.1 Usuarios y grupos: ejercicio-1.1-usuarios.md
+    - 1.2 Procesos y servicios: ejercicio-1.2-procesos-servicios.md
+    - 1.3 Repositorio Git: ejercicio-1.3-git.md
+  - Modulo 2 - Administracion de sistemas:
+    - Resumen Semana 2: resumen-semana2.md
+    - Resumen Semana 3: resumen-semana3.md
+    - 2.1 Instalacion Debian: ejercicio-2.1-instalacion-debian.md
+    - 2.2 Configuracion de red: ejercicio-2.2-configuracion-red.md
+    - 2.3 SSH: ejercicio-2.3-ssh.md
+    - 2.4 Cron: ejercicio-2.4-cron.md
+    - 2.4 Monitor: ejercicio-2.4-monitor.md
+    - 2.5 Analisis de logs: ejercicio-2.5-analisis-logs.md
+  - Modulo 3 - Redes y servicios:
+    - Resumen: resumen-semana4-5.md
+    - 3.1 Diseno de red: ejercicio-3.1-diseno-red.md
+    - 3.2 DNS (BIND9): ejercicio-3.2-dns-bind9.md
+    - 3.3 DHCP: ejercicio-3.3-dhcp.md
+    - 3.4 Nginx: ejercicio-3.4-nginx.md
+    - 3.5 Troubleshooting: ejercicio-3.5-troubleshooting.md
+  - Extras:
+    - Wiki de documentacion: extra-wiki.md
+
+markdown_extensions:
+  - tables
+  - fenced_code
+  - codehilite
+  - admonition
+  - toc:
+      permalink: true
