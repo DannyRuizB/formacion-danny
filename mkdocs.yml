@@ -39,6 +39,7 @@ nav:
     - 3.5 Troubleshooting: ejercicio-3.5-troubleshooting.md
   - Extras:
     - Wiki de documentacion: extra-wiki.md
+    - Dashboard de monitorizacion: extra-dashboard.md
 
 markdown_extensions:
   - tables

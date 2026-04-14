@@ -43,3 +43,4 @@
 | Proyecto | Descripcion |
 |----------|-------------|
 | [Wiki de documentacion](extra-wiki.md) | Esta misma web, generada con MkDocs y servida por Nginx |
+| [Dashboard de monitorizacion](extra-dashboard.md) | Panel web en tiempo real con estado del servidor |
