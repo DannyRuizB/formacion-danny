@@ -1,0 +1,126 @@
+/* Header personalizado */
+.md-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-bottom: 2px solid #e94560;
+}
+
+.md-header__title {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Tabs de navegacion */
+.md-tabs {
+    background: #16213e;
+}
+
+/* Links */
+.md-typeset a {
+    color: #00bcd4;
+}
+
+.md-typeset a:hover {
+    color: #e94560;
+}
+
+/* Bloques de codigo */
+.md-typeset code {
+    border-radius: 4px;
+}
+
+/* Tablas */
+.md-typeset table:not([class]) th {
+    background-color: #1a1a2e;
+    color: #e94560;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    letter-spacing: 1px;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+    background-color: #1a1a2e;
+    color: #e94560;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) th {
+    background-color: #f0f0f5;
+    color: #6a1b9a;
+}
+
+/* Sidebar navegacion */
+.md-nav__link--active {
+    font-weight: 700;
+}
+
+/* Footer */
+.md-footer {
+    background: #1a1a2e;
+    border-top: 2px solid #e94560;
+}
+
+/* Boton scroll to top */
+.md-top {
+    background-color: #e94560;
+}
+
+/* Search */
+.md-search__input {
+    border-radius: 8px;
+}
+
+/* Cards efecto hover en sidebar */
+.md-nav__item:hover > .md-nav__link {
+    color: #e94560;
+}
+
+/* Titulo h1 */
+.md-typeset h1 {
+    color: #e94560;
+    font-weight: 800;
+    border-bottom: 2px solid #e94560;
+    padding-bottom: 8px;
+}
+
+[data-md-color-scheme="default"] .md-typeset h1 {
+    color: #6a1b9a;
+    border-bottom-color: #6a1b9a;
+}
+
+/* Titulo h2 */
+.md-typeset h2 {
+    color: #00bcd4;
+    font-weight: 700;
+}
+
+[data-md-color-scheme="default"] .md-typeset h2 {
+    color: #0f3460;
+}
+
+/* Capturas decorativas en los bordes - estilo polaroid rotadas */
+.deco-polaroid {
+    position: fixed;
+    width: 180px;
+    height: 110px;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 3px;
+    border: 3px solid white;
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.5);
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.deco-polaroid.deco-hidden {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg) !important;
+}
+
+/* Ocultar en pantallas pequenas */
+@media (max-width: 1500px) {
+    .deco-polaroid {
+        display: none;
+    }
+}

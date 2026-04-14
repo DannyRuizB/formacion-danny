@@ -6,12 +6,43 @@ theme:
   name: material
   language: es
   palette:
-    primary: blue grey
-    accent: teal
+    - scheme: slate
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Modo claro
+    - scheme: default
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Modo oscuro
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    logo: material/server-network
+  custom_dir: overrides
   features:
     - navigation.sections
     - navigation.expand
+    - navigation.top
     - content.code.copy
+    - search.highlight
+    - search.suggest
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: "#"
+      name: Danny Ruiz Boluda
+
+extra_css:
+  - stylesheets/custom.css
+extra_javascript:
+  - javascripts/deco.js
 
 nav:
   - Inicio: index.md
@@ -47,5 +78,12 @@ markdown_extensions:
   - fenced_code
   - codehilite
   - admonition
+  - attr_list
+  - md_in_html
   - toc:
       permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
