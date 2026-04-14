@@ -82,11 +82,48 @@ server {
 }
 ```
 
+## Servicio systemd (/etc/systemd/system/miapi.service)
+
+Para que la API arranque automaticamente con el servidor y se reinicie si se cae:
+
+```ini
+[Unit]
+Description=API Express - Dashboard de monitorizacion
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/miapi
+ExecStart=/usr/bin/node /opt/miapi/server.js
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+systemctl daemon-reload
+systemctl enable miapi
+systemctl start miapi
+```
+
+| Parametro | Funcion |
+|-----------|---------|
+| After=network.target | Espera a que la red este lista |
+| Restart=always | Se reinicia automaticamente si se cae |
+| RestartSec=5 | Espera 5 segundos antes de reiniciar |
+| WantedBy=multi-user.target | Arranca con el sistema |
+
+![Servicio miapi activo](img/miapi-systemd-status.png)
+
 ## Resultado
 
 ![Dashboard del servidor](img/dashboard-servidor.png)
 
 - Panel de monitorizacion en tiempo real funcionando
-- Muestra disco, RAM, carga del sistema y estado de 5 servicios
+- Muestra CPU, RAM, disco, carga del sistema y estado de 5 servicios
 - Accesible en `http://dashboard.practicas.local:8080` via tunel SSH
 - Se actualiza automaticamente cada 10 segundos
+- API persistente como servicio systemd (arranca con el servidor)
