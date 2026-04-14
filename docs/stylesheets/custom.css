@@ -1,3 +1,140 @@
+/* ===== PORTADA ===== */
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 30px 0 10px;
+}
+
+.hero h1 {
+    font-size: 2.2em !important;
+    border-bottom: none !important;
+    margin-bottom: 5px !important;
+}
+
+.hero-subtitle {
+    font-size: 1.1em;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+/* Cards de info */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.card-info {
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(233, 69, 96, 0.3);
+}
+
+[data-md-color-scheme="slate"] .card-info {
+    background: #16213e;
+}
+
+[data-md-color-scheme="default"] .card-info {
+    background: #f5f0ff;
+    border-color: rgba(106, 27, 154, 0.2);
+}
+
+.card-info h3 {
+    font-size: 0.75em !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888 !important;
+    margin-bottom: 5px !important;
+}
+
+/* Iconos de progreso */
+.green {
+    color: #4ecca3 !important;
+}
+
+.pending {
+    color: #555 !important;
+}
+
+/* Services grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.service-card {
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #e94560;
+}
+
+[data-md-color-scheme="slate"] .service-card {
+    background: #16213e;
+}
+
+[data-md-color-scheme="default"] .service-card {
+    background: #f5f0ff;
+    border-left-color: #6a1b9a;
+}
+
+.service-card h3 {
+    font-size: 0.9em !important;
+    margin-bottom: 5px !important;
+}
+
+/* Extras grid */
+.extras-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.extra-card {
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(233, 69, 96, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.extra-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+[data-md-color-scheme="slate"] .extra-card {
+    background: #16213e;
+}
+
+[data-md-color-scheme="default"] .extra-card {
+    background: #f5f0ff;
+    border-color: rgba(106, 27, 154, 0.2);
+}
+
+.extra-card h3 {
+    font-size: 0.9em !important;
+}
+
+.extra-card img {
+    border-radius: 6px;
+    margin-top: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .cards-grid, .services-grid, .extras-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== GLOBAL ===== */
+
 /* Header personalizado */
 .md-header {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
