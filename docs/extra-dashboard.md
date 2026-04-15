@@ -133,6 +133,12 @@ Se amplio el dashboard con 6 secciones nuevas:
 
 ![Dashboard del servidor v2](img/dashboard-servidor-v2.png)
 
+### Version 3 - Tokyo Night (2026-04-15)
+
+Cambio de paleta de colores a **Tokyo Night**: fondo gris (#2a2a3a), cards oscuras (#1e1e2e), violeta (#bb9af7), azul (#7aa2f7), rojo calido (#e8756a) para titulos. Tres capas de profundidad para mejor contraste.
+
+![Dashboard del servidor v3](img/dashboard-servidor-v3.png)
+
 - Panel de monitorizacion completo con 10 secciones en tiempo real
 - 6 servicios monitorizados (incluyendo la propia API miapi)
 - Top 5 procesos por uso de CPU
