@@ -25,41 +25,44 @@ Navegador --> Nginx (reverse proxy) --> API Express (puerto 3000) --> datos del 
 
 ### Datos que devuelve /api/sistema
 
-```json
-{
-    "hostname": "debian13",
-    "ip": "10.160.218.20",
-    "uptime": "up 3 hours, 29 minutes",
-    "carga": "0.00 0.01 0.00",
-    "disco": { "porcentaje": 10, "total": "30G", "usado": "2,6G" },
-    "memoria": { "porcentaje": 21, "total": "1973 MB", "usada": "418 MB" },
-    "servicios": [
-        { "nombre": "nginx", "estado": "activo" },
-        { "nombre": "named", "estado": "activo" },
-        { "nombre": "isc-dhcp-server", "estado": "activo" },
-        { "nombre": "ssh", "estado": "activo" },
-        { "nombre": "cron", "estado": "activo" }
-    ]
-}
-```
+| Seccion | Datos | Fuente |
+|---------|-------|--------|
+| CPU | Uso %, cores, modelo | `top -bn1`, `nproc`, `/proc/cpuinfo` |
+| Memoria | Uso %, total, usada | `free -m` |
+| Disco | Uso %, total, usado | `df /` |
+| Carga | 1, 5 y 15 minutos | `/proc/loadavg` |
+| Servicios | Estado de 6 servicios | `systemctl is-active` |
+| Top procesos | 5 procesos con mas CPU | `ps aux --sort=-%cpu` |
+| Usuarios | Sesiones SSH activas | `who` |
+| Trafico de red | Bytes RX/TX en ens18 | `/sys/class/net/ens18/statistics/` |
+| Leases DHCP | IPs asignadas activas | `/var/lib/dhcp/dhcpd.leases` |
+| Conexiones | Conexiones TCP/UDP activas | `ss -tun state established` |
+| Historial | Ultimos 30 valores CPU/RAM | Almacenado en memoria del servidor |
 
-### Como obtiene los datos
+## Frontend (index.html)
 
-| Dato | Comando |
-|------|---------|
-| Disco | `df /`, `df -h /` |
-| Memoria | `free -m` |
-| Uptime | `uptime -p` |
-| Carga | `/proc/loadavg` |
-| Servicios | `systemctl is-active --quiet` por cada servicio |
+### Secciones del panel
 
-## Frontend (dashboard.html)
+| Seccion | Descripcion |
+|---------|-------------|
+| Info bar | Hostname, IP y uptime del servidor |
+| CPU / RAM / Disco | Barras de progreso con colores (verde < 60%, amarillo < 80%, rojo >= 80%) |
+| Historial | Graficas sparkline con los ultimos 5 minutos de CPU y RAM |
+| Carga del sistema | Valores de carga a 1, 5 y 15 minutos |
+| Servicios | 6 servicios monitorizados (nginx, named, isc-dhcp-server, ssh, cron, miapi) |
+| Usuarios conectados | Sesiones SSH activas con nombre, terminal y origen |
+| Trafico de red | Bytes recibidos (RX) y enviados (TX) en ens18 |
+| Leases DHCP | IPs asignadas con hostname y MAC (deduplicadas) |
+| Top procesos | 5 procesos que mas CPU consumen (tabla tipo htop) |
+| Conexiones activas | Conexiones TCP/UDP establecidas con protocolo, local y remoto |
 
-- Barras de progreso con colores segun uso (verde < 60%, amarillo < 80%, rojo >= 80%)
-- Indicadores de servicios con puntos verdes/rojos
+### Caracteristicas
+
 - Actualizacion automatica cada 10 segundos
 - Boton de actualizacion manual
-- Diseno responsive y tema oscuro
+- Diseno responsive (3 columnas en escritorio, 1 en movil)
+- Tema oscuro con colores neon
+- Badges con contadores en cada seccion
 
 ## Configuracion Nginx (/etc/nginx/sites-available/dashboard)
 
@@ -120,10 +123,23 @@ systemctl start miapi
 
 ## Resultado
 
-![Dashboard del servidor](img/dashboard-servidor.png)
+![Dashboard del servidor v1](img/dashboard-servidor.png)
 
-- Panel de monitorizacion en tiempo real funcionando
-- Muestra CPU, RAM, disco, carga del sistema y estado de 5 servicios
-- Accesible en `http://dashboard.practicas.local:8080` via tunel SSH
-- Se actualiza automaticamente cada 10 segundos
+Version inicial con CPU, RAM, disco, carga y servicios.
+
+### Version 2 (2026-04-15)
+
+Se amplio el dashboard con 6 secciones nuevas:
+
+![Dashboard del servidor v2](img/dashboard-servidor-v2.png)
+
+- Panel de monitorizacion completo con 10 secciones en tiempo real
+- 6 servicios monitorizados (incluyendo la propia API miapi)
+- Top 5 procesos por uso de CPU
+- Usuarios conectados por SSH con avatar y origen
+- Trafico de red RX/TX en ens18
+- Leases DHCP activas (deduplicadas por IP)
+- Conexiones TCP/UDP establecidas
+- Historial de CPU y RAM con graficas sparkline (ultimos 5 minutos)
+- Accesible en `http://dashboard.practicas.local:8080` via tunel SSH (`ssh wiki`)
 - API persistente como servicio systemd (arranca con el servidor)
