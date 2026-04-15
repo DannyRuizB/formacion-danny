@@ -7,14 +7,14 @@ theme:
   language: es
   palette:
     - scheme: slate
-      primary: deep purple
-      accent: cyan
+      primary: black
+      accent: red
       toggle:
         icon: material/brightness-4
         name: Modo claro
     - scheme: default
-      primary: deep purple
-      accent: cyan
+      primary: red
+      accent: teal
       toggle:
         icon: material/brightness-7
         name: Modo oscuro
