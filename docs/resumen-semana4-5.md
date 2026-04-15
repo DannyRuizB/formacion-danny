@@ -4,7 +4,7 @@
 
 | Ejercicio | Estado | Documento |
 |-----------|--------|-----------|
-| 3.1 Diseño de red (3 VLANs) | Completado | [ejercicio-3.1](ejercicio-3.1-diseño-red.md) |
+| 3.1 Diseño de red (3 VLANs) | Completado | [ejercicio-3.1](ejercicio-3.1-diseno-red.md) |
 | 3.2 Servidor DNS (BIND9) | Completado | [ejercicio-3.2](ejercicio-3.2-dns-bind9.md) |
 | 3.3 Servidor DHCP | Completado | [ejercicio-3.3](ejercicio-3.3-dhcp.md) |
 | 3.4 Nginx (web + reverse proxy) | Completado | [ejercicio-3.4](ejercicio-3.4-nginx.md) |
