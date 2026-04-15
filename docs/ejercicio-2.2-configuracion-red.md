@@ -1,14 +1,23 @@
 # Ejercicio 2.2 - Configuracion de red
 
 ## Objetivo
-Configurar IP estatica en la VM debian13, verificar conectividad y resolver DNS.
+Configurar IP estatica en la VM cliente1, verificar conectividad y resolver DNS.
+
+## Conceptos de red
+
+| Concepto | Descripcion |
+|----------|-------------|
+| IP estatica | Direccion fija asignada manualmente (no cambia al reiniciar) |
+| CIDR /24 | Mascara 255.255.255.0 — permite 254 hosts en la red |
+| Gateway | Puerta de enlace — envia el trafico fuera de la red local |
+| DNS | Servidor que traduce nombres de dominio a direcciones IP |
 
 ## Datos de red
 
 | Equipo | IP | Rol |
 |--------|----|-----|
 | Nodo Proxmox | 10.160.218.10 | Hipervisor |
-| debian13 (VM) | 10.160.218.20 | Servidor de practicas |
+| cliente1 (VM) | 10.160.218.20 | Servidor de practicas |
 | Gateway | 10.160.218.254 | Puerta de enlace |
 
 ## Comandos
@@ -48,6 +57,39 @@ $ ping -c 2 10.160.218.10
 rtt min/avg/max/mdev = 0.666/2.157/3.648/1.491 ms
 ```
 
+## Herramientas de diagnostico
+
+Comandos utiles para comprobar la red:
+
+```bash
+# Ver interfaces y sus IPs
+ip a
+
+# Ver tabla de rutas (gateway configurado)
+ip route
+
+# Ver puertos abiertos y servicios escuchando
+ss -tulnp
+
+# Comprobar conectividad con otro equipo
+ping -c 4 10.160.218.10
+
+# Trazar la ruta que siguen los paquetes
+traceroute 10.160.218.10
+
+# Consultar DNS (si hay servidor DNS disponible)
+dig practicas.local
+nslookup practicas.local
+```
+
+| Comando | Para que sirve |
+|---------|---------------|
+| `ip a` | Ver direcciones IP de todas las interfaces |
+| `ip route` | Ver la tabla de enrutamiento y el gateway |
+| `ss -tulnp` | Ver que puertos estan abiertos y que proceso los usa |
+| `ping` | Comprobar si hay conectividad con otro equipo |
+| `traceroute` | Ver por donde pasan los paquetes hasta el destino |
+
 ## Capturas
 
 ![IP configurada y ping al nodo Proxmox](img/ejercicio-2.2-red-configurada.png)
@@ -55,4 +97,4 @@ rtt min/avg/max/mdev = 0.666/2.157/3.648/1.491 ms
 ## Resultado
 - IP estatica 10.160.218.20/24 configurada correctamente en ens18
 - Conectividad con el nodo Proxmox (10.160.218.10) verificada
-- Sin acceso a internet (pendiente de habilitar puertos DNS)
+- Sin acceso a internet en el momento del ejercicio (resuelto posteriormente con entradas en /etc/hosts)

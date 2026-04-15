@@ -3,7 +3,26 @@
 ## Objetivo
 Instalar Nginx, gestionar el servicio con systemctl y consultar los logs.
 
-## Comandos
+## Gestion de paquetes con apt
+
+Antes de instalar, se actualiza la lista de paquetes disponibles:
+
+```bash
+sudo apt update          # Actualizar lista de paquetes
+sudo apt search nginx    # Buscar paquetes que contengan "nginx"
+sudo apt show nginx      # Ver info detallada de un paquete
+dpkg -l | grep nginx     # Ver paquetes instalados que contengan "nginx"
+```
+
+| Comando | Para que sirve |
+|---------|---------------|
+| `apt update` | Descarga la lista actualizada de paquetes disponibles |
+| `apt install` | Instala un paquete |
+| `apt search` | Busca paquetes por nombre o descripcion |
+| `apt show` | Muestra detalles de un paquete (version, dependencias) |
+| `dpkg -l` | Lista todos los paquetes instalados en el sistema |
+
+## Instalacion
 
 Instalar Nginx:
 ```bash
@@ -42,6 +61,32 @@ $ systemctl is-enabled nginx
 enabled
 ```
 
+## Gestion de procesos
+
+Ver los procesos de Nginx y su uso de recursos:
+
+```bash
+# Ver procesos en tiempo real (interactivo)
+htop
+
+# Buscar el PID de un proceso
+pidof nginx
+
+# Matar un proceso por PID (solo en caso de emergencia)
+kill -9 <PID>
+```
+
+| Señal | Comando | Descripcion |
+|-------|---------|-------------|
+| SIGTERM (15) | `kill PID` | Pide al proceso que termine limpiamente |
+| SIGKILL (9) | `kill -9 PID` | Fuerza la terminacion inmediata (ultimo recurso) |
+| SIGHUP (1) | `kill -1 PID` | Recarga la configuracion sin reiniciar |
+
+!!! warning "Matar procesos"
+    Usar `kill -9` solo como ultimo recurso. Para servicios gestionados por systemd, siempre es mejor usar `systemctl stop/restart`.
+
+## Logs
+
 Consultar logs:
 ```bash
 $ sudo journalctl -u nginx --since today
@@ -50,6 +95,15 @@ mar 30 08:45:59 danny systemd[1]: Stopping nginx.service
 mar 30 08:45:59 danny systemd[1]: Stopped nginx.service
 mar 30 08:47:12 danny systemd[1]: Started nginx.service
 ```
+
+Opciones utiles de journalctl:
+
+| Opcion | Descripcion |
+|--------|-------------|
+| `-u nginx` | Filtrar por servicio |
+| `--since today` | Solo logs de hoy |
+| `-f` | Seguir en tiempo real (como tail -f) |
+| `-n 50` | Mostrar las ultimas 50 lineas |
 
 ## Capturas
 
