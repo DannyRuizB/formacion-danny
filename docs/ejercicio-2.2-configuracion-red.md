@@ -1,15 +1,15 @@
-# Ejercicio 2.2 - Configuracion de red
+# Ejercicio 2.2 - Configuración de red
 
 ## Objetivo
-Configurar IP estatica en la VM cliente1, verificar conectividad y resolver DNS.
+Configurar IP estática en la VM cliente1, verificar conectividad y resolver DNS.
 
 ## Conceptos de red
 
-| Concepto | Descripcion |
+| Concepto | Descripción |
 |----------|-------------|
-| IP estatica | Direccion fija asignada manualmente (no cambia al reiniciar) |
+| IP estática | Dirección fija asignada manualmente (no cambia al reiniciar) |
 | CIDR /24 | Mascara 255.255.255.0 — permite 254 hosts en la red |
-| Gateway | Puerta de enlace — envia el trafico fuera de la red local |
+| Gateway | Puerta de enlace — envia el tráfico fuera de la red local |
 | DNS | Servidor que traduce nombres de dominio a direcciones IP |
 
 ## Datos de red
@@ -17,7 +17,7 @@ Configurar IP estatica en la VM cliente1, verificar conectividad y resolver DNS.
 | Equipo | IP | Rol |
 |--------|----|-----|
 | Nodo Proxmox | 10.160.218.10 | Hipervisor |
-| cliente1 (VM) | 10.160.218.20 | Servidor de practicas |
+| cliente1 (VM) | 10.160.218.20 | Servidor de prácticas |
 | Gateway | 10.160.218.254 | Puerta de enlace |
 
 ## Comandos
@@ -31,7 +31,7 @@ cat /etc/network/interfaces
 
 La interfaz ens18 estaba en estado DOWN y sin IP asignada.
 
-Configurar IP estatica editando /etc/network/interfaces:
+Configurar IP estática editando /etc/network/interfaces:
 ```
 auto ens18
 iface ens18 inet static
@@ -45,7 +45,7 @@ Levantar la interfaz:
 ifup ens18
 ```
 
-## Verificacion
+## Verificación
 
 ```bash
 $ ip a show ens18
@@ -57,9 +57,9 @@ $ ping -c 2 10.160.218.10
 rtt min/avg/max/mdev = 0.666/2.157/3.648/1.491 ms
 ```
 
-## Herramientas de diagnostico
+## Herramientas de diagnóstico
 
-Comandos utiles para comprobar la red:
+Comandos útiles para comprobar la red:
 
 ```bash
 # Ver interfaces y sus IPs
@@ -95,6 +95,6 @@ nslookup practicas.local
 ![IP configurada y ping al nodo Proxmox](img/ejercicio-2.2-red-configurada.png)
 
 ## Resultado
-- IP estatica 10.160.218.20/24 configurada correctamente en ens18
+- IP estática 10.160.218.20/24 configurada correctamente en ens18
 - Conectividad con el nodo Proxmox (10.160.218.10) verificada
 - Sin acceso a internet en el momento del ejercicio (resuelto posteriormente con entradas en /etc/hosts)

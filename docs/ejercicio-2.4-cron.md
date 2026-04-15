@@ -5,7 +5,7 @@ Crear un script que registre el uso de disco y programarlo con cron para que se 
 
 ## Sintaxis de crontab
 
-Cada linea de crontab sigue este formato de 5 campos + comando:
+Cada línea de crontab sigue este formato de 5 campos + comando:
 
 ```
 ┌───────── minuto (0-59)
@@ -27,7 +27,7 @@ Cada linea de crontab sigue este formato de 5 campos + comando:
 
 ## Script: backup-disk-usage.sh
 
-Ubicacion: /usr/local/bin/backup-disk-usage.sh
+Ubicación: /usr/local/bin/backup-disk-usage.sh
 
 ```bash
 #!/bin/bash
@@ -44,7 +44,7 @@ Crear directorio de logs:
 mkdir -p /var/log/mis-scripts
 ```
 
-Dar permisos de ejecucion:
+Dar permisos de ejecución:
 ```bash
 chmod +x /usr/local/bin/backup-disk-usage.sh
 ```
@@ -58,7 +58,7 @@ cat /var/log/mis-scripts/disk-usage.log
 Programar con cron (cada hora en punto):
 ```bash
 crontab -e
-# Añadir la linea:
+# Añadir la línea:
 0 * * * * /usr/local/bin/backup-disk-usage.sh
 ```
 
@@ -67,9 +67,9 @@ Verificar crontab:
 crontab -l
 ```
 
-## Verificar ejecucion en syslog
+## Verificar ejecución en syslog
 
-Cron registra cada ejecucion en el syslog del sistema:
+Cron registra cada ejecución en el syslog del sistema:
 
 ```bash
 grep CRON /var/log/syslog | tail -5
@@ -83,7 +83,7 @@ Apr 14 12:00:01 cliente1 CRON[1234]: (soltecsis) CMD (/usr/local/bin/backup-disk
 Si el script no aparece en syslog, puede ser que cron no este activo (`systemctl status cron`) o que haya un error de permisos en el script.
 
 !!! tip "Alternativa: systemd timers"
-    En sistemas modernos con systemd, se pueden usar **timers** en vez de cron. La ventaja es que se integran con `journalctl` para ver los logs. En este ejercicio usamos cron por ser mas sencillo y universal.
+    En sistemas modernos con systemd, se pueden usar **timers** en vez de cron. La ventaja es que se integran con `journalctl` para ver los logs. En este ejercicio usamos cron por ser más sencillo y universal.
 
 ## Capturas
 
@@ -95,4 +95,4 @@ Si el script no aparece en syslog, puede ser que cron no este activo (`systemctl
 - Script creado en el servidor cliente1 (10.160.218.20)
 - Registra fecha y uso de disco en /var/log/mis-scripts/disk-usage.log
 - Programado con cron para ejecutarse cada hora en punto (`0 * * * *`)
-- Se puede verificar la ejecucion con `grep CRON /var/log/syslog`
+- Se puede verificar la ejecución con `grep CRON /var/log/syslog`

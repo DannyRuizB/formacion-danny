@@ -9,7 +9,7 @@ Configurar el entorno de trabajo y verificar el acceso SSH al servidor de practi
 - **SO:** Debian 12 (kernel 6.8.12-20-pve)
 - **Plataforma:** Proxmox VE
 
-## Conexion SSH exitosa
+## Conexión SSH exitosa
 
 ```bash
 ssh soltecsis@10.160.218.10

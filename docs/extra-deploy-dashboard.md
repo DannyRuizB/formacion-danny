@@ -16,7 +16,7 @@ ssh wiki "sudo systemctl restart miapi"
 
 Facil de equivocarse y de olvidar algun paso.
 
-## Solucion: scripts/deploy-dashboard.sh
+## Solución: scripts/deploy-dashboard.sh
 
 ```bash
 #!/bin/bash
@@ -55,14 +55,14 @@ echo "=== Dashboard desplegado en http://dashboard.practicas.local ==="
 
 ## Que hace cada paso
 
-| Paso | Accion | Descripcion |
+| Paso | Accion | Descripción |
 |------|--------|-------------|
 | 1/3 | `scp` a /tmp | Sube los dos ficheros al servidor (a /tmp porque no hay permisos directos) |
 | 2/3 | `sudo mv` | Mueve los ficheros a su destino final (/opt/miapi y /var/www/dashboard) |
 | 3/3 | `systemctl restart` | Reinicia la API para que cargue el nuevo server.js |
 
 !!! note "El HTML no necesita reinicio"
-    El `index.html` se sirve directamente por Nginx, asi que los cambios de frontend se ven solo con refrescar el navegador. El reinicio de miapi solo es necesario cuando se modifica `server.js`.
+    El `index.html` se sirve directamente por Nginx, así que los cambios de frontend se ven solo con refrescar el navegador. El reinicio de miapi solo es necesario cuando se modifica `server.js`.
 
 ## Alias
 
@@ -75,7 +75,7 @@ alias dashboard="/home/danny/formacion-danny/scripts/deploy-dashboard.sh"
 
 El dashboard se edita en el PC local y se despliega al servidor:
 
-| Fichero local | Destino en servidor | Funcion |
+| Fichero local | Destino en servidor | Función |
 |---------------|-------------------|---------|
 | ~/dashboard-server.js | /opt/miapi/server.js | API Express (backend) |
 | ~/dashboard-index.html | /var/www/dashboard/index.html | Panel web (frontend) |
@@ -100,4 +100,4 @@ dashboard
 - Dashboard desplegable con un solo comando
 - Valida que los ficheros existen antes de subir
 - Sube via /tmp para evitar problemas de permisos
-- Reinicia la API automaticamente
+- Reinicia la API automáticamente

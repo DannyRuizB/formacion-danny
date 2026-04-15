@@ -1,4 +1,4 @@
-# Ejercicio 1.3 - Repositorio de documentacion
+# Ejercicio 1.3 - Repositorio de documentación
 
 ## Objetivo
 Crear un repositorio Git con estructura organizada, practicar commits, ramas y merge.
@@ -29,13 +29,13 @@ node_modules/
 site/
 ```
 
-!!! tip "Buenas practicas con .gitignore"
+!!! tip "Buenas prácticas con .gitignore"
     Siempre crear un .gitignore al inicio del proyecto. Evita subir al repositorio ficheros temporales, dependencias (node_modules), secretos (.env) o builds generados (site/).
 
 Crear README.md y primer commit:
 ```bash
 git add .
-git commit -m "Inicio del repositorio de formacion"
+git commit -m "Inicio del repositorio de formación"
 ```
 
 Crear rama feature/semana1 y trabajar en ella:
@@ -57,11 +57,11 @@ git merge feature/semana1
 ```bash
 $ git log --oneline
 421295a (HEAD -> main, feature/semana1) Añadir progreso semana 1
-2b9044f Entregable lunes: captura acceso SSH al servidor de practicas
-8fed098 Añadir seccion de capturas en ejercicios 1.1 y 1.2
+2b9044f Entregable lunes: captura acceso SSH al servidor de prácticas
+8fed098 Añadir sección de capturas en ejercicios 1.1 y 1.2
 fddd68e Ejercicio 1.2: procesos y servicios con Nginx
-113b9ad Ejercicio 1.1: gestion de usuarios y grupos
-0becee4 Inicio del repositorio de formacion
+113b9ad Ejercicio 1.1: gestión de usuarios y grupos
+0becee4 Inicio del repositorio de formación
 ```
 
 ## Estructura del repositorio
@@ -79,9 +79,9 @@ formacion-danny/
 └── configs/
 ```
 
-## Buenas practicas de Git
+## Buenas prácticas de Git
 
-| Practica | Descripcion |
+| Práctica | Descripción |
 |----------|-------------|
 | Commits atomicos | Cada commit debe ser un cambio logico completo, no mezclar cosas |
 | Mensajes descriptivos | Escribir que se hizo y por que, no solo "cambios" |

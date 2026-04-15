@@ -1,11 +1,11 @@
 # Ejercicio 3.3 - Servidor DHCP
 
 ## Objetivo
-Instalar y configurar ISC DHCP Server para asignar IPs automaticamente a los clientes de la red.
+Instalar y configurar ISC DHCP Server para asignar IPs automáticamente a los clientes de la red.
 
 ## Como funciona DHCP
 
-DHCP (Dynamic Host Configuration Protocol) asigna IPs automaticamente a los clientes de la red. El proceso se llama **DORA**:
+DHCP (Dynamic Host Configuration Protocol) asigna IPs automáticamente a los clientes de la red. El proceso se llama **DORA**:
 
 ```
 Cliente                          Servidor DHCP
@@ -20,20 +20,20 @@ Cliente                          Servidor DHCP
    │                                  │
 ```
 
-| Paso | Nombre | Descripcion |
+| Paso | Nombre | Descripción |
 |------|--------|-------------|
 | 1 | **D**iscover | El cliente busca servidores DHCP en la red (broadcast) |
 | 2 | **O**ffer | El servidor ofrece una IP disponible del rango |
 | 3 | **R**equest | El cliente acepta la oferta |
-| 4 | **A**ck | El servidor confirma y asigna la IP con un tiempo de concesion (lease) |
+| 4 | **A**ck | El servidor confirma y asigna la IP con un tiempo de concesión (lease) |
 
-## Instalacion
+## Instalación
 
 ```bash
 apt install -y isc-dhcp-server
 ```
 
-## Configuracion
+## Configuración
 
 ### 1. Interfaz de escucha (/etc/default/isc-dhcp-server)
 
@@ -41,7 +41,7 @@ apt install -y isc-dhcp-server
 INTERFACESv4="ens18"
 ```
 
-### 2. Configuracion DHCP (/etc/dhcp/dhcpd.conf)
+### 2. Configuración DHCP (/etc/dhcp/dhcpd.conf)
 
 ```
 subnet 10.160.218.0 netmask 255.255.255.0 {
@@ -54,16 +54,16 @@ subnet 10.160.218.0 netmask 255.255.255.0 {
 }
 ```
 
-| Parametro | Valor | Descripcion |
+| Parámetro | Valor | Descripción |
 |-----------|-------|-------------|
 | range | 10.160.218.100 - 200 | Rango de IPs que asigna (101 direcciones) |
 | routers | 10.160.218.254 | Gateway por defecto |
 | domain-name-servers | 10.160.218.20 | Servidor DNS (nuestro BIND9) |
-| domain-name | practicas.local | Dominio de busqueda |
-| default-lease-time | 600 | Tiempo de concesion por defecto (10 min) |
-| max-lease-time | 7200 | Tiempo maximo de concesion (2 horas) |
+| domain-name | practicas.local | Dominio de búsqueda |
+| default-lease-time | 600 | Tiempo de concesión por defecto (10 min) |
+| max-lease-time | 7200 | Tiempo máximo de concesión (2 horas) |
 
-## Verificacion
+## Verificación
 
 ```bash
 systemctl restart isc-dhcp-server
@@ -83,7 +83,7 @@ cat /var/lib/dhcp/dhcpd.leases
 
 Para verificar el DHCP, se arranco la VM **cliente2** (1003), un clon de cliente1, y se configuro su red para usar DHCP.
 
-### 1. Configuracion del cliente (/etc/network/interfaces)
+### 1. Configuración del cliente (/etc/network/interfaces)
 
 ```
 auto ens18
@@ -106,7 +106,7 @@ Se puede ver el proceso completo:
 - `soliciting a DHCP lease` — envia Discover
 - `offered 10.160.218.100 from 10.160.218.20` — el servidor (cliente1) ofrece la IP
 - `leased 10.160.218.100 for 600 seconds` — lease confirmada por 10 minutos
-- `adding default route via 10.160.218.254` — gateway configurado automaticamente
+- `adding default route via 10.160.218.254` — gateway configurado automáticamente
 
 ### 3. Verificar lease en el servidor
 
@@ -133,5 +133,5 @@ La lease muestra:
 - ISC DHCP Server instalado y funcionando en cliente1 (10.160.218.20)
 - Rango configurado: 10.160.218.100 - 10.160.218.200
 - DNS apuntando a nuestro BIND9 (10.160.218.20)
-- **Verificado con cliente2**: obtiene IP 10.160.218.100, gateway y DNS automaticamente
+- **Verificado con cliente2**: obtiene IP 10.160.218.100, gateway y DNS automáticamente
 - Leases registradas en /var/lib/dhcp/dhcpd.leases

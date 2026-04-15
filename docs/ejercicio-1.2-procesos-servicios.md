@@ -1,9 +1,9 @@
 # Ejercicio 1.2 - Procesos y servicios
 
 ## Objetivo
-Instalar Nginx, gestionar el servicio con systemctl y consultar los logs.
+Instalar Nginx, gestiónar el servicio con systemctl y consultar los logs.
 
-## Gestion de paquetes con apt
+## Gestión de paquetes con apt
 
 Antes de instalar, se actualiza la lista de paquetes disponibles:
 
@@ -18,11 +18,11 @@ dpkg -l | grep nginx     # Ver paquetes instalados que contengan "nginx"
 |---------|---------------|
 | `apt update` | Descarga la lista actualizada de paquetes disponibles |
 | `apt install` | Instala un paquete |
-| `apt search` | Busca paquetes por nombre o descripcion |
+| `apt search` | Busca paquetes por nombre o descripción |
 | `apt show` | Muestra detalles de un paquete (version, dependencias) |
 | `dpkg -l` | Lista todos los paquetes instalados en el sistema |
 
-## Instalacion
+## Instalación
 
 Instalar Nginx:
 ```bash
@@ -52,7 +52,7 @@ $ curl http://localhost
 curl: (7) Failed to connect to localhost port 80 after 0 ms: Couldn't connect to server
 ```
 
-Arrancar y habilitar inicio automatico:
+Arrancar y habilitar inicio automático:
 ```bash
 $ sudo systemctl start nginx
 $ sudo systemctl enable nginx
@@ -61,7 +61,7 @@ $ systemctl is-enabled nginx
 enabled
 ```
 
-## Gestion de procesos
+## Gestión de procesos
 
 Ver los procesos de Nginx y su uso de recursos:
 
@@ -76,14 +76,14 @@ pidof nginx
 kill -9 <PID>
 ```
 
-| Señal | Comando | Descripcion |
+| Señal | Comando | Descripción |
 |-------|---------|-------------|
 | SIGTERM (15) | `kill PID` | Pide al proceso que termine limpiamente |
-| SIGKILL (9) | `kill -9 PID` | Fuerza la terminacion inmediata (ultimo recurso) |
-| SIGHUP (1) | `kill -1 PID` | Recarga la configuracion sin reiniciar |
+| SIGKILL (9) | `kill -9 PID` | Fuerza la terminacion inmediata (último recurso) |
+| SIGHUP (1) | `kill -1 PID` | Recarga la configuración sin reiniciar |
 
 !!! warning "Matar procesos"
-    Usar `kill -9` solo como ultimo recurso. Para servicios gestionados por systemd, siempre es mejor usar `systemctl stop/restart`.
+    Usar `kill -9` solo como último recurso. Para servicios gestiónados por systemd, siempre es mejor usar `systemctl stop/restart`.
 
 ## Logs
 
@@ -96,14 +96,14 @@ mar 30 08:45:59 danny systemd[1]: Stopped nginx.service
 mar 30 08:47:12 danny systemd[1]: Started nginx.service
 ```
 
-Opciones utiles de journalctl:
+Opciones útiles de journalctl:
 
-| Opcion | Descripcion |
+| Opción | Descripción |
 |--------|-------------|
 | `-u nginx` | Filtrar por servicio |
 | `--since today` | Solo logs de hoy |
 | `-f` | Seguir en tiempo real (como tail -f) |
-| `-n 50` | Mostrar las ultimas 50 lineas |
+| `-n 50` | Mostrar las últimas 50 líneas |
 
 ## Capturas
 
@@ -114,8 +114,8 @@ Opciones utiles de journalctl:
 ![Logs de Nginx con journalctl](img/ejercicio-1.2-nginx-logs.png)
 
 ## Resultado
-- Nginx se instalo correctamente
-- Se verifico que el servicio se puede parar y arrancar con systemctl
+- Nginx se instaló correctamente
+- Se verificó que el servicio se puede parar y arrancar con systemctl
 - Al pararlo, el puerto 80 deja de responder
-- Esta configurado para arrancar automaticamente al inicio (enabled)
+- Esta configurado para arrancar automáticamente al inicio (enabled)
 - Los logs muestran el historial de arranques y paradas del servicio

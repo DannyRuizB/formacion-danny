@@ -1,9 +1,9 @@
-# Ejercicio 3.4 - Configurar Nginx (web estatica + reverse proxy)
+# Ejercicio 3.4 - Configurar Nginx (web estática + reverse proxy)
 
 ## Objetivo
-Crear una web estatica con Nginx, instalar Node.js con una API Express y configurar Nginx como reverse proxy.
+Crear una web estática con Nginx, instalar Node.js con una API Express y configurar Nginx como reverse proxy.
 
-## 1. Web estatica
+## 1. Web estática
 
 ### Crear el directorio y la pagina
 
@@ -77,11 +77,11 @@ echo "127.0.0.1 miweb.practicas.local" | sudo tee -a /etc/hosts
 
 Acceder via tunel SSH: `http://miweb.practicas.local:8080`
 
-![Web estatica con Nginx](img/nginx-web-estatica.png)
+![Web estática con Nginx](img/nginx-web-estática.png)
 
 ## 2. API con Node.js y Express
 
-### Instalacion
+### Instalación
 
 ```bash
 apt install -y nodejs npm
@@ -91,7 +91,7 @@ npm init -y
 npm install express
 ```
 
-### Codigo de la API (/opt/miapi/server.js)
+### Código de la API (/opt/miapi/server.js)
 
 ```javascript
 const express = require('express');
@@ -128,7 +128,7 @@ curl http://localhost:3000/api
 
 ## 3. Nginx como reverse proxy
 
-### Configuracion actualizada (/etc/nginx/sites-available/miweb)
+### Configuración actualizada (/etc/nginx/sites-available/miweb)
 
 ```nginx
 server {
@@ -154,7 +154,7 @@ server {
 ```
 
 ### Que hace el reverse proxy
-- Las peticiones a `/` sirven la web estatica desde /var/www/miweb
+- Las peticiones a `/` sirven la web estática desde /var/www/miweb
 - Las peticiones a `/api` se reenvian a Node.js en el puerto 3000
 - Los headers `X-Real-IP` y `X-Forwarded-For` pasan la IP real del cliente a la API
 
@@ -163,14 +163,14 @@ nginx -t
 systemctl reload nginx
 ```
 
-### Verificacion
+### Verificación
 
 Acceso a `http://miweb.practicas.local:8080/api` desde el navegador:
 
 ![Reverse proxy API](img/nginx-reverse-proxy-api.png)
 
 ## Resultado
-- Web estatica servida por Nginx en miweb.practicas.local
+- Web estática servida por Nginx en miweb.practicas.local
 - API Express con Node.js en puerto 3000 (endpoints /api y /api/info)
 - Nginx como reverse proxy redirige /api a Node.js
 - Todo accesible desde PC local via tunel SSH

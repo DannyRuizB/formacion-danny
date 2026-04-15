@@ -1,11 +1,11 @@
-# Extra: Configuracion SSH con alias
+# Extra: Configuración SSH con alias
 
 ## Objetivo
 Simplificar las conexiones SSH al laboratorio con alias en `~/.ssh/config`, evitando escribir IPs, usuarios y opciones cada vez.
 
 ## El problema
 
-Sin configuracion, cada conexion requiere recordar la IP, usuario y opciones:
+Sin configuración, cada conexión requiere recordar la IP, usuario y opciones:
 
 ```bash
 # Conectar al nodo Proxmox
@@ -15,11 +15,11 @@ ssh -i ~/.ssh/id_ed25519 soltecsis@10.160.218.10
 ssh -L 8080:localhost:80 soltecsis@10.160.218.20
 ```
 
-Estos comandos son largos, faciles de equivocarse y dificiles de recordar.
+Estos comandos son largos, fáciles de equivocarse y difíciles de recordar.
 
-## La solucion: ~/.ssh/config
+## La solución: ~/.ssh/config
 
-El fichero `~/.ssh/config` permite definir alias con toda la configuracion predefinida:
+El fichero `~/.ssh/config` permite definir alias con toda la configuración predefinida:
 
 ```
 Host servidor
@@ -37,11 +37,11 @@ Host wiki
 
 ### `ssh servidor` — Nodo Proxmox
 
-| Parametro | Valor | Descripcion |
+| Parámetro | Valor | Descripción |
 |-----------|-------|-------------|
 | HostName | 10.160.218.10 | IP del nodo Proxmox |
 | User | soltecsis | Usuario SSH |
-| IdentityFile | ~/.ssh/id_ed25519 | Clave publica (sin contraseña) |
+| IdentityFile | ~/.ssh/id_ed25519 | Clave pública (sin contraseña) |
 
 Usos:
 
@@ -53,7 +53,7 @@ ssh servidor "sudo qm start 1003"   # Arrancar una VM
 
 ### `ssh wiki` — Servidor + tunel web
 
-| Parametro | Valor | Descripcion |
+| Parámetro | Valor | Descripción |
 |-----------|-------|-------------|
 | HostName | 10.160.218.20 | IP de cliente1 (servidor) |
 | User | soltecsis | Usuario SSH |
@@ -65,14 +65,14 @@ Usos:
 ssh wiki                            # Abrir shell + tunel
 ```
 
-Mientras la sesion este abierta, se puede acceder desde el navegador a:
+Mientras la sesión este abierta, se puede acceder desde el navegador a:
 
-- `http://wiki.practicas.local:8080` — Wiki de documentacion
-- `http://miweb.practicas.local:8080` — Web estatica
-- `http://dashboard.practicas.local:8080` — Dashboard de monitorizacion
+- `http://wiki.practicas.local:8080` — Wiki de documentación
+- `http://miweb.practicas.local:8080` — Web estática
+- `http://dashboard.practicas.local:8080` — Dashboard de monitorización
 
 !!! tip "Solo un tunel a la vez"
-    Si abres un segundo `ssh wiki` mientras ya hay uno abierto, veras el aviso `Could not request local forwarding` porque el puerto 8080 ya esta ocupado. La conexion SSH funciona igualmente, solo el tunel no se duplica.
+    Si abres un segundo `ssh wiki` mientras ya hay uno abierto, veras el aviso `Could not request local forwarding` porque el puerto 8080 ya esta ocupado. La conexión SSH funciona igualmente, solo el tunel no se duplica.
 
 ## Como funciona LocalForward
 
@@ -89,10 +89,10 @@ Mientras la sesion este abierta, se puede acceder desde el navegador a:
 2. El servidor lo redirige a su **puerto 80** (Nginx)
 3. La respuesta vuelve por el mismo tunel
 
-Asi se accede a servicios remotos como si estuvieran en tu maquina local, sin exponer puertos al exterior.
+Así se accede a servicios remotos como si estuvieran en tu maquina local, sin exponer puertos al exterior.
 
 ## Resultado
-- Conexion al nodo Proxmox con `ssh servidor` (con clave publica, sin contraseña)
-- Conexion al servidor de practicas con `ssh wiki` (con tunel automatico)
+- Conexión al nodo Proxmox con `ssh servidor` (con clave pública, sin contraseña)
+- Conexión al servidor de prácticas con `ssh wiki` (con tunel automático)
 - Acceso a wiki, web y dashboard desde el navegador local via el tunel
-- Toda la configuracion en un solo fichero: `~/.ssh/config`
+- Toda la configuración en un solo fichero: `~/.ssh/config`

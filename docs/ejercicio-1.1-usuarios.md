@@ -1,15 +1,15 @@
-# Ejercicio 1.1 - Gestion de usuarios
+# Ejercicio 1.1 - Gestión de usuarios
 
 ## Objetivo
 Crear 3 usuarios y 2 grupos, asignarlos y crear un directorio con permisos para el grupo backend.
 
 ## Conceptos clave
 
-En Linux cada usuario tiene un **UID** (identificador numerico) y pertenece a un **grupo principal** (GID). Ademas puede estar en **grupos secundarios** que le dan acceso a recursos compartidos.
+En Linux cada usuario tiene un **UID** (identificador numérico) y pertenece a un **grupo principal** (GID). Además puede estar en **grupos secundarios** que le dan acceso a recursos compartidos.
 
-| Concepto | Descripcion |
+| Concepto | Descripción |
 |----------|-------------|
-| UID | Identificador unico del usuario (1000+ para usuarios normales) |
+| UID | Identificador único del usuario (1000+ para usuarios normales) |
 | GID | Identificador del grupo principal |
 | Grupos secundarios | Grupos adicionales a los que pertenece el usuario |
 | /etc/passwd | Fichero con la lista de usuarios del sistema |
@@ -48,13 +48,13 @@ sudo chmod 775 /proyecto
 
 | Digito | Quien | Permisos | Significado |
 |--------|-------|----------|-------------|
-| 7 | Propietario (root) | rwx | Lectura + escritura + ejecucion |
-| 7 | Grupo (backend) | rwx | Lectura + escritura + ejecucion |
-| 5 | Otros | r-x | Solo lectura y ejecucion |
+| 7 | Propietario (root) | rwx | Lectura + escritura + ejecución |
+| 7 | Grupo (backend) | rwx | Lectura + escritura + ejecución |
+| 5 | Otros | r-x | Solo lectura y ejecución |
 
-Asi, solo los miembros del grupo **backend** (dbadmin y deploy) pueden crear ficheros dentro de `/proyecto`. Los demas usuarios solo pueden leer y entrar al directorio.
+Así, solo los miembros del grupo **backend** (dbadmin y deploy) pueden crear ficheros dentro de `/proyecto`. Los demas usuarios solo pueden leer y entrar al directorio.
 
-## Verificacion
+## Verificación
 
 ```bash
 $ id webadmin

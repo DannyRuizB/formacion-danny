@@ -1,31 +1,31 @@
-# Extra: Wiki de documentacion
+# Extra: Wiki de documentación
 
 ## Objetivo
-Montar una wiki web con toda la documentacion del curso, accesible desde el navegador via Nginx.
+Montar una wiki web con toda la documentación del curso, accesible desde el navegador via Nginx.
 
 ## Herramientas utilizadas
 
-| Herramienta | Funcion |
+| Herramienta | Función |
 |-------------|---------|
-| MkDocs | Generador de sitios estaticos desde Markdown |
-| mkdocs-material | Tema profesional con buscador, navegacion y responsive |
+| MkDocs | Generador de sitios estáticos desde Markdown |
+| mkdocs-material | Tema profesional con buscador, navegación y responsive |
 | Nginx | Servidor web que sirve la wiki |
 
-## Instalacion de MkDocs (PC local)
+## Instalación de MkDocs (PC local)
 
 ```bash
 pipx install mkdocs
 pipx inject mkdocs mkdocs-material
 ```
 
-## Configuracion (mkdocs.yml)
+## Configuración (mkdocs.yml)
 
 El fichero `mkdocs.yml` en la raiz del repositorio define:
 
 - Nombre del sitio y autor
 - Tema Material con colores personalizados
 - Navegacion organizada por modulos
-- Extensiones de Markdown (tablas, codigo, admonitions)
+- Extensiones de Markdown (tablas, código, admonitions)
 
 ## Flujo de trabajo
 
@@ -40,7 +40,7 @@ mkdocs serve
 # Abrir http://127.0.0.1:8000
 ```
 
-## Configuracion Nginx
+## Configuración Nginx
 
 Virtual host en `/etc/nginx/sites-available/wiki`:
 
@@ -72,7 +72,7 @@ systemctl reload nginx
 ![Wiki servida por Nginx](img/wiki-nginx-servidor.png)
 
 ## Resultado
-- Wiki profesional con buscador, navegacion lateral y tema Material
-- Toda la documentacion del curso accesible desde el navegador
-- Servida por Nginx en el servidor de practicas
+- Wiki profesional con buscador, navegación lateral y tema Material
+- Toda la documentación del curso accesible desde el navegador
+- Servida por Nginx en el servidor de prácticas
 - Facil de actualizar: editar .md, rebuild y subir

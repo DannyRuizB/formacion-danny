@@ -1,4 +1,4 @@
-# Ejercicio 2.4 - Script de monitorizacion basica
+# Ejercicio 2.4 - Script de monitorización básica
 
 ## Objetivo
 Crear un script que monitorice disco, memoria y servicios del servidor, y programarlo con cron.
@@ -9,7 +9,7 @@ Crear un script que monitorice disco, memoria y servicios del servidor, y progra
 
 ## Script monitor.sh
 
-Ubicacion en el servidor: `/usr/local/bin/monitor.sh`
+Ubicación en el servidor: `/usr/local/bin/monitor.sh`
 
 ```bash
 #!/bin/bash
@@ -49,15 +49,15 @@ echo "---" >> "$LOG"
 3. Comprueba si los servicios nginx, ssh y cron estan activos
 4. Escribe todo en `/var/log/monitor.log`
 
-### Instalacion
+### Instalación
 ```bash
 cp monitor.sh /usr/local/bin/monitor.sh
 chmod +x /usr/local/bin/monitor.sh
 ```
 
-## Ejecucion y resultado
+## Ejecución y resultado
 
-Ejecucion manual del script y resultado en el log:
+Ejecución manual del script y resultado en el log:
 
 ![Monitor log output](img/monitor-log-output.png)
 

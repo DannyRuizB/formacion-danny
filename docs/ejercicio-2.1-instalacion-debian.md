@@ -1,4 +1,4 @@
-# Ejercicio 2.1 - Instalacion de Debian 12 en Proxmox
+# Ejercicio 2.1 - Instalación de Debian 12 en Proxmox
 
 ## Objetivo
 Instalar un servidor Debian 12 en Proxmox con acceso SSH funcional.
@@ -12,42 +12,42 @@ Instalar un servidor Debian 12 en Proxmox con acceso SSH funcional.
 | URL panel | https://10.160.218.10:8080 |
 | Red | localnetwork |
 
-## Creacion de la VM en Proxmox
+## Creación de la VM en Proxmox
 
-Desde el panel web de Proxmox: **Create VM** con la siguiente configuracion:
+Desde el panel web de Proxmox: **Create VM** con la siguiente configuración:
 
-| Parametro | Valor | Motivo |
+| Parámetro | Valor | Motivo |
 |-----------|-------|--------|
 | VM ID | 1002 | Siguiente ID disponible |
-| Nombre | cliente1 | Sera el servidor de practicas |
-| ISO | Debian 13 (Trixie) netinst | Ultima version estable disponible |
+| Nombre | cliente1 | Sera el servidor de prácticas |
+| ISO | Debian 13 (Trixie) netinst | Última versión estable disponible |
 | CPU | qemu64, 4 cores | Sin KVM (Proxmox virtualizado dentro de otro Proxmox) |
 | RAM | 2048 MB | Suficiente para servicios de red |
 | Disco | 32 GB VirtIO Block | Almacenamiento local |
 | Red | VirtIO, bridge vmbr0 | Acceso a la red del laboratorio |
 
 !!! note "Sin soporte KVM"
-    Al ser un Proxmox dentro de otro Proxmox, no hay VT-x disponible. Se usa emulacion con qemu64 en vez de host como tipo de CPU.
+    Al ser un Proxmox dentro de otro Proxmox, no hay VT-x disponible. Se usa emulación con qemu64 en vez de host como tipo de CPU.
 
 ## Particionado
 
-Se uso el particionado guiado de Debian con separacion de particiones:
+Se uso el particionado guiado de Debian con separación de particiones:
 
-| Particion | Punto de montaje | Tamaño | Uso |
+| Partición | Punto de montaje | Tamaño | Uso |
 |-----------|-----------------|--------|-----|
 | /dev/sda1 | / | ~28 GB | Sistema operativo |
 | /dev/sda2 | swap | ~2 GB | Memoria virtual |
 
-## Seleccion de paquetes
+## Selección de paquetes
 
-Durante la instalacion solo se marcaron:
+Durante la instalación solo se marcaron:
 
 - **SSH server** — acceso remoto
-- **Utilidades estandar del sistema** — herramientas basicas de linea de comandos
+- **Utilidades estandar del sistema** — herramientas básicas de línea de comandos
 
-No se instalo entorno grafico para mantener el servidor ligero.
+No se instalo entorno gráfico para mantener el servidor ligero.
 
-## Post-instalacion
+## Post-instalación
 
 Una vez arrancada la VM, primeros comandos como root:
 
@@ -65,7 +65,7 @@ usermod -aG sudo soltecsis
 | vim | Editor de texto avanzado |
 | net-tools | Comandos de red clasicos (ifconfig, netstat) |
 
-## Servidor de practicas
+## Servidor de prácticas
 
 - **SO:** Debian 13 Trixie
 - **IP:** 10.160.218.20 (configurada en ejercicio 2.2)
@@ -77,7 +77,7 @@ usermod -aG sudo soltecsis
 | ID | Nombre | IP | Rol | Estado |
 |----|--------|----|-----|--------|
 | 1001 | debian13 | - | No en uso | Apagada |
-| 1002 | cliente1 | 10.160.218.20 | Servidor | Funcionando |
+| 1002 | cliente1 | 10.160.218.20 | Servidor | Funciónando |
 | 1003 | cliente2 | - | Cliente | Sin configurar |
 
 ## Capturas
@@ -87,8 +87,8 @@ usermod -aG sudo soltecsis
 ![Acceso SSH al servidor](img/acceso-ssh-servidor.png)
 
 ## Resultado
-- VM creada con Debian 13 en Proxmox (emulacion qemu64, sin KVM)
-- Paquetes basicos instalados (sudo, curl, htop, vim, net-tools)
+- VM creada con Debian 13 en Proxmox (emulación qemu64, sin KVM)
+- Paquetes básicos instalados (sudo, curl, htop, vim, net-tools)
 - Usuario soltecsis con permisos sudo
 - Acceso SSH verificado
 - Servidor listo para configurar red (ejercicio 2.2) y servicios

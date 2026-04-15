@@ -1,8 +1,8 @@
 <div class="hero" markdown>
 
-# Formacion FCT - Zataca Systems
+# Formación FCT - Zataca Systems
 
-<div class="hero-subtitle">Documentacion tecnica del curso de Formacion en Centro de Trabajo</div>
+<div class="hero-subtitle">Documentación técnica del curso de Formación en Centro de Trabajo</div>
 
 </div>
 
@@ -32,15 +32,15 @@ Tutor: Adrian Rodrigo Melon Gutte
 
 <div class="progress-overview" markdown>
 
-| | Modulo | Semanas | Estado |
+| | Módulo | Semanas | Estado |
 |---|--------|---------|--------|
-| :material-check-circle:{ .green } | 1. Introduccion al entorno de trabajo | 1 | **Completado** |
-| :material-check-circle:{ .green } | 2. Administracion de sistemas operativos | 2-3 | **Completado** |
+| :material-check-circle:{ .green } | 1. Introducción al entorno de trabajo | 1 | **Completado** |
+| :material-check-circle:{ .green } | 2. Administración de sistemas operativos | 2-3 | **Completado** |
 | :material-check-circle:{ .green } | 3. Redes y servicios | 4-5 | **Completado** |
-| :material-circle-outline:{ .pending } | 4. Virtualizacion y contenedores | 6-7 | Pendiente |
+| :material-circle-outline:{ .pending } | 4. Virtualización y contenedores | 6-7 | Pendiente |
 | :material-circle-outline:{ .pending } | 5. Bases de datos | 7-8 | Pendiente |
 | :material-circle-outline:{ .pending } | 6. Seguridad | 8-9 | Pendiente |
-| :material-circle-outline:{ .pending } | 7. Automatizacion y documentacion | 9-10 | Pendiente |
+| :material-circle-outline:{ .pending } | 7. Automatización y documentación | 9-10 | Pendiente |
 | :material-circle-outline:{ .pending } | 8. Proyecto final | 10-12 | Pendiente |
 
 </div>
@@ -79,7 +79,7 @@ Tutor: Adrian Rodrigo Melon Gutte
 
 <div class="service-card" markdown>
 ### :material-web: Nginx
-Puerto **80** — Web estatica + reverse proxy
+Puerto **80** — Web estática + reverse proxy
 </div>
 
 <div class="service-card" markdown>
@@ -89,7 +89,7 @@ Puerto **53** — DNS (zona practicas.local)
 
 <div class="service-card" markdown>
 ### :material-ip-network: ISC DHCP
-Puerto **67** — Asignacion automatica de IPs
+Puerto **67** — Asignación automática de IPs
 </div>
 
 <div class="service-card" markdown>
@@ -114,12 +114,12 @@ monitor.sh + backup-disk-usage.sh cada hora
 <div class="extras-grid" markdown>
 
 <div class="extra-card" markdown>
-### :material-book-open-variant: [Wiki de documentacion](extra-wiki.md)
+### :material-book-open-variant: [Wiki de documentación](extra-wiki.md)
 Esta misma web, generada con MkDocs Material y servida por Nginx en el servidor.
 </div>
 
 <div class="extra-card" markdown>
-### :material-monitor-dashboard: [Dashboard de monitorizacion](extra-dashboard.md)
+### :material-monitor-dashboard: [Dashboard de monitorización](extra-dashboard.md)
 Panel web en tiempo real con CPU, RAM, disco, carga y estado de servicios.
 
 ![Dashboard](img/dashboard-servidor.png)

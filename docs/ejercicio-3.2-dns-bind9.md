@@ -3,13 +3,13 @@
 ## Objetivo
 Instalar BIND9, crear una zona directa para "practicas.local" y verificar con dig.
 
-## Instalacion
+## Instalación
 
 ```bash
 apt install -y bind9 bind9-utils dnsutils
 ```
 
-## Configuracion
+## Configuración
 
 ### 1. Opciones generales (/etc/bind/named.conf.options)
 
@@ -57,18 +57,18 @@ mail    IN  A   10.160.218.20
 ```
 
 #### Tipos de registro DNS
-| Tipo | Funcion |
+| Tipo | Función |
 |------|---------|
-| SOA | Start of Authority - informacion de la zona |
+| SOA | Start of Authority - información de la zona |
 | NS | Name Server - servidor DNS autoritativo |
 | A | Asocia nombre a IPv4 |
 | AAAA | Asocia nombre a IPv6 |
 | CNAME | Alias de otro nombre |
 | MX | Servidor de correo |
 
-## Verificacion
+## Verificación
 
-### Comprobar configuracion
+### Comprobar configuración
 ```bash
 named-checkconf
 named-checkzone practicas.local /etc/bind/db.practicas.local
@@ -84,7 +84,7 @@ systemctl status bind9
 
 ![BIND9 status](img/bind9-status.png)
 
-### Comprobar resolucion con dig
+### Comprobar resolución con dig
 ```bash
 dig @localhost web.practicas.local
 dig @localhost mail.practicas.local
@@ -92,7 +92,7 @@ dig @localhost mail.practicas.local
 
 Ambos registros resuelven correctamente a 10.160.218.20:
 
-![Verificacion dig](img/bind9-dig-verificacion.png)
+![Verificación dig](img/bind9-dig-verificación.png)
 
 ## Resultado
 - BIND9 instalado y funcionando como servidor DNS
