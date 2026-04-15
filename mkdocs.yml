@@ -72,6 +72,7 @@ nav:
     - Wiki de documentacion: extra-wiki.md
     - Dashboard de monitorizacion: extra-dashboard.md
     - Script despliegue wiki: extra-deploy-wiki.md
+    - Script despliegue dashboard: extra-deploy-dashboard.md
     - Configuracion SSH: extra-ssh-config.md
 
 markdown_extensions:
