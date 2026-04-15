@@ -63,7 +63,7 @@ nav:
     - 2.5 Analisis de logs: ejercicio-2.5-analisis-logs.md
   - Modulo 3 - Redes y servicios:
     - Resumen: resumen-semana4-5.md
-    - 3.1 Diseno de red: ejercicio-3.1-diseno-red.md
+    - 3.1 Diseño de red: ejercicio-3.1-diseno-red.md
     - 3.2 DNS (BIND9): ejercicio-3.2-dns-bind9.md
     - 3.3 DHCP: ejercicio-3.3-dhcp.md
     - 3.4 Nginx: ejercicio-3.4-nginx.md
