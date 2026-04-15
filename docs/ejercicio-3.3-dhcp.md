@@ -79,40 +79,59 @@ Servidor DHCP activo, escuchando en ens18, 0 leases iniciales.
 cat /var/lib/dhcp/dhcpd.leases
 ```
 
-## Verificar con un cliente
+## Prueba con cliente real (cliente2)
 
-Para comprobar que un cliente obtiene IP automaticamente:
+Para verificar el DHCP, se arranco la VM **cliente2** (1003), un clon de cliente1, y se configuro su red para usar DHCP.
 
-```bash
-# En el cliente (si tiene dhclient):
-sudo dhclient -v ens18
+### 1. Configuracion del cliente (/etc/network/interfaces)
 
-# Ver la IP asignada:
-ip a show ens18
+```
+auto ens18
+iface ens18 inet dhcp
 ```
 
-En el servidor, las concesiones activas se guardan en:
+### 2. Solicitar IP al servidor DHCP
+
+```bash
+sudo ifup ens18
+```
+
+El cliente completa el proceso DORA y obtiene la IP **10.160.218.100** (la primera del rango):
+
+![cliente2 obtiene IP por DHCP](img/dhcp-cliente2-lease.png)
+
+Se puede ver el proceso completo:
+
+- `dhcpcd-10.1.0 starting` — el cliente DHCP arranca
+- `soliciting a DHCP lease` — envia Discover
+- `offered 10.160.218.100 from 10.160.218.20` — el servidor (cliente1) ofrece la IP
+- `leased 10.160.218.100 for 600 seconds` — lease confirmada por 10 minutos
+- `adding default route via 10.160.218.254` — gateway configurado automaticamente
+
+### 3. Verificar lease en el servidor
+
+Desde cliente1, se comprueba que la lease queda registrada:
 
 ```bash
 cat /var/lib/dhcp/dhcpd.leases
 ```
 
-Ejemplo de una concesion:
-```
-lease 10.160.218.100 {
-  starts 2026/04/14 10:00:00;
-  ends 2026/04/14 10:10:00;
-  binding state active;
-  hardware ethernet aa:bb:cc:dd:ee:ff;
-}
-```
+![Leases registradas en el servidor](img/dhcp-leases-servidor.png)
 
-!!! note "Pendiente"
-    La VM cliente2 (1003) aun no esta configurada. Cuando se arranque con la red en modo DHCP, deberia obtener una IP del rango .100-.200 automaticamente.
+La lease muestra:
+
+| Campo | Valor |
+|-------|-------|
+| IP asignada | 10.160.218.100 |
+| Inicio | 2026/04/15 07:01:25 |
+| Fin | 2026/04/15 07:11:25 (10 min) |
+| Estado | active |
+| MAC | bc:24:11:9c:08:98 |
+| Hostname | debian13 (nombre del clon original) |
 
 ## Resultado
-- ISC DHCP Server instalado y funcionando
+- ISC DHCP Server instalado y funcionando en cliente1 (10.160.218.20)
 - Rango configurado: 10.160.218.100 - 10.160.218.200
 - DNS apuntando a nuestro BIND9 (10.160.218.20)
-- Leases almacenadas en /var/lib/dhcp/dhcpd.leases
-- Pendiente: verificar con cliente2 cuando se configure
+- **Verificado con cliente2**: obtiene IP 10.160.218.100, gateway y DNS automaticamente
+- Leases registradas en /var/lib/dhcp/dhcpd.leases
