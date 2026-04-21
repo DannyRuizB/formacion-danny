@@ -74,6 +74,7 @@ nav:
     - Resumen Semana 6: resumen-semana6.md
     - Teoria - Virtualizacion: teoria-virtualizacion.md
     - 4.1 Crear VM en Proxmox: ejercicio-4.1-vm-proxmox.md
+    - 4.2 Almacenamiento: ejercicio-4.2-almacenamiento.md
   - Extras:
     - Wiki de documentacion: extra-wiki.md
     - Dashboard de monitorizacion: extra-dashboard.md
