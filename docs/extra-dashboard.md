@@ -180,6 +180,16 @@ Se añade un sistema de alertas que compara las métricas en tiempo real contra 
 ]
 ```
 
+#### Ejemplos reales
+
+Alerta **warning** cuando la RAM supera el 80%:
+
+![Dashboard con alerta warning de RAM al 90%](img/dashboard-alerta-warning.png)
+
+Alerta **critical** cuando la CPU supera el 90%:
+
+![Dashboard con alerta critical de CPU al 94%](img/dashboard-alerta-critica.png)
+
 ### Versión 5 - Monitorización multi-host (2026-04-21)
 
 El dashboard pasa de vigilar solo `cliente1` a monitorizar **4 máquinas** del laboratorio desde un único panel, con un selector de pestañas para cambiar de una a otra.
@@ -244,3 +254,63 @@ Devuelve la lista de máquinas disponibles para que el selector se genere dinám
 - Las leases DHCP solo existen en `cliente1` (es el servidor DHCP), en el resto se muestran vacías.
 - Cambiar de pestaña a una máquina remota tiene unos segundos de latencia porque cada refresh lanza varios comandos por SSH.
 - El historial de CPU y RAM se guarda por máquina de forma independiente.
+
+### Versión 6 - Widget Servy (2026-04-21)
+
+Se añade una mascota flotante llamada **Servy** en la esquina inferior derecha del dashboard. Cambia de cara automáticamente según el estado real del servidor.
+
+#### Humores
+
+| Humor | Condición | Aspecto |
+|-------|-----------|---------|
+| **eufórico** | CPU < 5% y RAM < 30% (servidor casi vacío) | Cara dorada con ojos de estrella y brillos animados |
+| **feliz** | Sin alertas y carga normal | Verde sonriente con mejillas rosas, animación de rebote |
+| **trabajando** | CPU > 50% (sin alertas) | Azul con "gafas" rectangulares, expresión neutra |
+| **hambriento** | RAM entre 60% y 80% | Naranja con boca abierta y lengua, pidiendo "comida" |
+| **preocupado** | Hay alertas de nivel warning | Amarillo con cejas fruncidas |
+| **enfermo** | Hay alertas de nivel critical | Rojo con ojos en X y lengua fuera, con animación de temblor |
+| **dormido** | Uptime mayor a 7 días sin carga | Azul oscuro con ojos cerrados y "Zzz" flotantes animados |
+
+#### Lógica de decisión
+
+La prioridad va de mayor a menor gravedad: `enfermo > preocupado > hambriento > trabajando > eufórico > dormido > feliz`. De esta forma una alerta crítica siempre gana sobre cualquier otro estado.
+
+#### Interacción
+
+Al hacer click sobre Servy se minimiza a un círculo pequeño (solo la cara) para no estorbar. Otro click lo devuelve a su tamaño completo con nombre y mensaje.
+
+Los mensajes bajo la cara rotan aleatoriamente entre varios para cada humor, así parece más vivo.
+
+#### Ejemplos reales
+
+Servidor al ralentí, **Servy eufórico**:
+
+![Servy eufórico con CPU al 4% y RAM al 19%](img/dashboard-servy-feliz.png)
+
+Servidor con CPU sobrecargada con `stress-ng`, **Servy enfermo**:
+
+![Servy enfermo con CPU al 94%](img/dashboard-alerta-critica.png)
+
+Servidor con memoria alta (RAM > 80%), **Servy preocupado**:
+
+![Servy preocupado con RAM al 90%](img/dashboard-alerta-warning.png)
+
+#### Cómo probar los humores
+
+Para forzar los humores sin esperar a que ocurra algo real se usa `stress-ng` en `cliente1`:
+
+```bash
+# Trabajando / enfermo (CPU alta)
+stress-ng --cpu 4 --timeout 60s
+
+# Hambriento (RAM entre 60-80%)
+stress-ng --vm 1 --vm-bytes 1400M --vm-keep --timeout 60s
+
+# Preocupado (CPU con warning sostenido)
+stress-ng --cpu 4 --cpu-load 75 --timeout 90s
+
+# Enfermo por servicio caído
+sudo systemctl stop cron
+# ...ver Servy rojo temblando...
+sudo systemctl start cron
+```
