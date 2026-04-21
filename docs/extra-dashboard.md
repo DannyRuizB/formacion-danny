@@ -149,3 +149,98 @@ Cambio de paleta de colores a **Tokyo Night**: fondo gris (#2a2a3a), cards oscur
 - Historial de CPU y RAM con gráficas sparkline (últimos 5 minutos)
 - Accesible en `http://dashboard.practicas.local:8080` via tunel SSH (`ssh wiki`)
 - API persistente como servicio systemd (arranca con el servidor)
+
+### Versión 4 - Alertas por umbrales (2026-04-21)
+
+Se añade un sistema de alertas que compara las métricas en tiempo real contra umbrales definidos y muestra un banner en la parte superior del dashboard cuando se supera alguno.
+
+#### Umbrales configurados
+
+| Métrica | Warning | Critical |
+|---------|---------|----------|
+| CPU | > 70% | > 90% |
+| RAM | > 80% | > 95% |
+| Disco | > 80% | > 90% |
+| Servicio | - | caído |
+| Carga 1 min | > cores × 2 | > cores × 4 |
+
+#### Comportamiento visual
+
+- **Warning** (amarillo): banner con borde naranja y fondo translúcido.
+- **Critical** (rojo): banner con animación pulsante (`@keyframes pulso`) para captar atención.
+- **Badge en el header** con contador tipo `2 crit / 1 warn`.
+- Si no hay alertas, el banner queda oculto.
+
+#### Ejemplo de respuesta de la API
+
+```json
+"alertas": [
+    { "nivel": "warning", "metrica": "RAM", "mensaje": "Uso de RAM alto: 82%" },
+    { "nivel": "critical", "metrica": "Servicio", "mensaje": "Servicio caído: nginx" }
+]
+```
+
+### Versión 5 - Monitorización multi-host (2026-04-21)
+
+El dashboard pasa de vigilar solo `cliente1` a monitorizar **4 máquinas** del laboratorio desde un único panel, con un selector de pestañas para cambiar de una a otra.
+
+#### Máquinas monitorizadas
+
+| ID | Nombre | Dirección | Rol |
+|----|--------|-----------|-----|
+| cliente1 | cliente1 | local | Servidor Debian 13 (donde corre miapi) |
+| proxmox | Proxmox Practicas | soltecsis@10.160.218.10 | Hipervisor Proxmox VE |
+| cliente2 | cliente2 | soltecsis@10.160.218.100 | VM cliente (clon) |
+| practica4 | practica4 | danbol@10.160.218.104 | VM ejercicio 4.1 |
+
+#### Arquitectura
+
+```
+Navegador --> Nginx --> API Express (cliente1)
+                            |
+                            +-- local --> cliente1 (execSync)
+                            |
+                            +-- SSH --> Proxmox
+                            +-- SSH --> cliente2
+                            +-- SSH --> practica4
+```
+
+La API ejecuta los comandos localmente cuando se pide `cliente1`, y usa `ssh <usuario>@<ip>` cuando se pide cualquier otra máquina. Cada host tiene su propia configuración de servicios a monitorizar y su interfaz de red.
+
+#### Configuración SSH
+
+Para que `miapi` (que corre como `root` en `cliente1`) pueda conectarse sin contraseña a las otras máquinas, se generó un par de claves en `/root/.ssh/id_ed25519` y se instaló con `ssh-copy-id` en las 3 máquinas remotas:
+
+```bash
+ssh-keygen -t ed25519 -N '' -f /root/.ssh/id_ed25519 -C "root@cliente1-dashboard"
+ssh-copy-id soltecsis@10.160.218.10
+ssh-copy-id soltecsis@10.160.218.100
+ssh-copy-id danbol@10.160.218.104
+```
+
+#### Servicios específicos por máquina
+
+| Máquina | Servicios monitorizados |
+|---------|-------------------------|
+| cliente1 | nginx, named, isc-dhcp-server, ssh, cron, miapi |
+| Proxmox | pveproxy, pvedaemon, pve-cluster, ssh, cron |
+| cliente2 | ssh, cron |
+| practica4 | ssh, cron |
+
+#### Selector en el frontend
+
+Barra de pestañas en la parte superior con una tarjeta por máquina (nombre + descripción). La pestaña activa se resalta con borde violeta y fondo distinto. Al pulsar cambia la variable `hostActual` en JavaScript y se recarga la API con `?host=<id>`.
+
+#### Endpoint nuevo
+
+```
+GET /api/hosts
+```
+
+Devuelve la lista de máquinas disponibles para que el selector se genere dinámicamente.
+
+#### Consideraciones
+
+- Las leases DHCP solo existen en `cliente1` (es el servidor DHCP), en el resto se muestran vacías.
+- Cambiar de pestaña a una máquina remota tiene unos segundos de latencia porque cada refresh lanza varios comandos por SSH.
+- El historial de CPU y RAM se guarda por máquina de forma independiente.
