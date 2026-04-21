@@ -186,7 +186,7 @@
     },
     progreso: function() {
       var modulos = [
-        { nombre: 'Modulo 1 - Introduccion', pct: 75 },
+        { nombre: 'Modulo 1 - Introduccion', pct: 100 },
         { nombre: 'Modulo 2 - Administracion', pct: 100 },
         { nombre: 'Modulo 3 - Redes y servicios', pct: 100 },
         { nombre: 'Modulo 4 - Virtualizacion', pct: 40 },
