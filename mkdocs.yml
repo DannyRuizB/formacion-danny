@@ -46,6 +46,8 @@ extra_javascript:
 
 nav:
   - Inicio: index.md
+  - Arquitectura del laboratorio: arquitectura-laboratorio.md
+  - Terminal: terminal.md
   - Modulo 1 - Introduccion:
     - Resumen: resumen-semana1.md
     - Entregable dia 1: entregable-semana1-lunes.md
@@ -68,6 +70,10 @@ nav:
     - 3.3 DHCP: ejercicio-3.3-dhcp.md
     - 3.4 Nginx: ejercicio-3.4-nginx.md
     - 3.5 Troubleshooting: ejercicio-3.5-troubleshooting.md
+  - Modulo 4 - Virtualizacion y contenedores:
+    - Resumen Semana 6: resumen-semana6.md
+    - Teoria - Virtualizacion: teoria-virtualizacion.md
+    - 4.1 Crear VM en Proxmox: ejercicio-4.1-vm-proxmox.md
   - Extras:
     - Wiki de documentacion: extra-wiki.md
     - Dashboard de monitorizacion: extra-dashboard.md
@@ -86,7 +92,11 @@ markdown_extensions:
       permalink: true
   - pymdownx.highlight:
       anchor_linenums: true
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.emoji:

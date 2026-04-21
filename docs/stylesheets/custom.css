@@ -250,9 +250,14 @@
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.deco-polaroid.deco-hidden {
+/* Imagen destino: oculta hasta que llega la polaroid */
+.fly-target {
     opacity: 0;
-    transform: scale(0.3) rotate(0deg) !important;
+    transition: opacity 0.4s ease;
+}
+
+.fly-target.fly-target-visible {
+    opacity: 1;
 }
 
 /* Ocultar en pantallas pequenas */
@@ -260,4 +265,45 @@
     .deco-polaroid {
         display: none;
     }
+}
+
+/* ===== ANIMACIONES SCROLL ===== */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger para elementos dentro de grids */
+.fade-in-stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+.fade-in-stagger.visible > *:nth-child(2) { transition-delay: 0.12s; }
+.fade-in-stagger.visible > *:nth-child(3) { transition-delay: 0.24s; }
+.fade-in-stagger.visible > *:nth-child(4) { transition-delay: 0.36s; }
+.fade-in-stagger.visible > *:nth-child(5) { transition-delay: 0.48s; }
+.fade-in-stagger.visible > *:nth-child(6) { transition-delay: 0.6s; }
+
+.fade-in-stagger.visible > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero con fade especial desde arriba */
+.hero.fade-in {
+    transform: translateY(-20px);
+}
+
+.hero.fade-in.visible {
+    transform: translateY(0);
 }
