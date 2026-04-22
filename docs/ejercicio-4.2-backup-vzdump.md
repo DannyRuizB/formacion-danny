@@ -8,12 +8,14 @@ Continuar con el Día 5 del Módulo 4: crear un backup de una VM con `vzdump`, p
 
 En la primera parte del ejercicio 4.2 se revisaron los tipos de almacenamiento del nodo `Practicas`. En este nodo hay un único storage `local` de tipo `dir`, con ~150 GB y admite contenido de tipo `backup`, así que sirve como destino.
 
-Estado inicial:
+Estado inicial: storage, VMs del nodo y backup ya generado en `/var/lib/vz/dump/`:
+
+![Estado inicial del nodo](img/vzdump-01-estado-inicial.png)
 
 ```
 $ sudo pvesm status
 Name         Type     Status           Total            Used       Available        %
-local         dir     active       154635004        15059884       133071160    9.74%
+local         dir     active       154635004        15608636       132522408   10.09%
 
 $ sudo qm list
 VMID NAME                STATUS     MEM(MB)    BOOTDISK(GB)
@@ -58,23 +60,28 @@ sudo vzdump 100 \
   --notes-template 'Backup manual ejercicio 4.2 vzdump - {{guestname}}'
 ```
 
-Salida (fragmento):
+Salida completa de la ejecución:
+
+![Backup manual con vzdump](img/vzdump-02-backup-manual.png)
+
+Fragmento clave:
 
 ```
 INFO: Starting Backup of VM 100 (qemu)
 INFO: VM Name: ejercicio4.1
 INFO: include disk 'scsi0' 'local:100/vm-100-disk-0.qcow2' 32G
 INFO: backup mode: snapshot
-INFO: creating vzdump archive '/var/lib/vz/dump/vzdump-qemu-100-2026_04_22-08_36_31.vma.zst'
-INFO:  10% (3.3 GiB of 32.0 GiB) in 3s
-INFO:  80% (25.7 GiB of 32.0 GiB) in 15s
-INFO: 100% (32.0 GiB of 32.0 GiB) in 19s
+INFO: creating vzdump archive '/var/lib/vz/dump/vzdump-qemu-100-*.vma.zst'
+INFO:  55% (17.8 GiB of 32.0 GiB) in 3s, read: 5.9 GiB/s
+INFO: 100% (32.0 GiB of 32.0 GiB) in 5s, read: 7.1 GiB/s
 INFO: backup is sparse: 30.78 GiB (96%) total zero data
-INFO: transferred 32.00 GiB in 19 seconds (1.7 GiB/s)
-INFO: archive file size: 532MB
-INFO: Finished Backup of VM 100 (00:00:19)
+INFO: transferred 32.00 GiB in 5 seconds (6.4 GiB/s)
+INFO: archive file size: 529MB
+INFO: Finished Backup of VM 100 (00:00:05)
 INFO: Backup job finished successfully
 ```
+
+> El mensaje final `ERROR: could not notify via target mail-to-root` es solo un aviso: Proxmox intenta enviar un correo de resumen y el destinatario por defecto (`root@`) no tiene dirección configurada. No afecta al backup, que ya terminó con éxito justo arriba.
 
 Resultado:
 
@@ -131,7 +138,17 @@ Opciones usadas:
 | `--prune-backups` | `keep-last=3` | **Retención:** mantener solo los 3 backups más recientes por VM. Los más antiguos se borran automáticamente. |
 | `--enabled` | `1` | Job activo. |
 
-### Verificación
+### Verificación en la GUI
+
+En **Datacenter → Backup** aparece el job creado. La columna *Next Run* muestra la próxima ejecución programada:
+
+![Job de backup en la GUI de Proxmox](img/vzdump-03-job-gui.png)
+
+En la parte inferior, el cuadro *Edit: Backup Job* permite revisar y modificar cada opción. La pestaña **General** reúne schedule, storage, compresión, modo y selección de VMs; la pestaña **Retention** expone las claves de retención (`keep-last`, `keep-daily`, etc.); y la pestaña **Note Template** muestra la plantilla de notas asociada a cada backup.
+
+El listado de VMs del job (100, 1001, 1002, 1003) aparece abajo porque está seleccionado modo `All`: incluye todas las VMs del nodo.
+
+### Verificación por CLI
 
 Proxmox guarda la config en `/etc/pve/jobs.cfg`:
 
@@ -183,7 +200,13 @@ sudo qmrestore /var/lib/vz/dump/vzdump-qemu-100-2026_04_22-08_36_31.vma.zst 200 
   --storage local
 ```
 
-Salida (final):
+Inicio del proceso: `qmrestore` desempaqueta el `.vma.zst`, formatea un `qcow2` nuevo para la VM 200 y empieza a escribir los bloques.
+
+![Inicio de qmrestore](img/vzdump-04-qmrestore-inicio.png)
+
+Final del proceso:
+
+![Fin de qmrestore](img/vzdump-04-qmrestore-final.png)
 
 ```
 progress 100% (read 34359738368 bytes, duration 5 sec)
@@ -192,7 +215,7 @@ space reduction due to 4K zero blocks 3.72%
 rescan volumes...
 ```
 
-Restauración completa en **5 segundos** gracias a que el 96% son bloques vacíos.
+Restauración completa en **5 segundos** gracias a que el 96% son bloques vacíos. El `rescan volumes...` del final hace que Proxmox reconozca el nuevo disco y lo asocie a la VM 200.
 
 ### Verificación de la config restaurada
 
@@ -237,7 +260,9 @@ sudo qm status 200
 # status: running
 ```
 
-La VM restaurada arranca correctamente → el backup es funcional.
+![VM 200 restaurada corriendo junto a la original](img/vzdump-05-vm200-running.png)
+
+En el `qm list` aparecen **las dos VMs corriendo a la vez** (100 y 200), cada una con su propio PID (`1830258` y `2249281`). La restaurada es funcional y arranca sin tocar a la original → el backup es válido.
 
 ### Limpieza
 
@@ -252,16 +277,9 @@ La flag `--purge` elimina también las referencias de la VM en replicación, fir
 
 Estado final tras la limpieza:
 
-```
-$ sudo qm list
-VMID NAME                STATUS     MEM(MB)    BOOTDISK(GB)
- 100 ejercicio4.1        running    2048              32.00
-1001 debian13            stopped    2048              32.00
-1002 cliente1            running    2048              32.00
-1003 cliente2            running    2048              32.00
-```
+![Limpieza y estado final](img/vzdump-06-limpieza.png)
 
-La VM original (100) nunca se ha detenido durante todo el ejercicio.
+La VM original (100) nunca se ha detenido durante todo el ejercicio. La copia temporal 200 ha desaparecido del listado tras el `destroy --purge`.
 
 ## Resumen
 
