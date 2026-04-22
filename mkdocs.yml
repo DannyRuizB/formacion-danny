@@ -75,6 +75,7 @@ nav:
     - Teoria - Virtualizacion: teoria-virtualizacion.md
     - 4.1 Crear VM en Proxmox: ejercicio-4.1-vm-proxmox.md
     - 4.2 Almacenamiento: ejercicio-4.2-almacenamiento.md
+    - 4.2 Backup vzdump y restauracion: ejercicio-4.2-backup-vzdump.md
   - Extras:
     - Wiki de documentacion: extra-wiki.md
     - Dashboard de monitorizacion: extra-dashboard.md

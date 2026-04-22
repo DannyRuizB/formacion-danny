@@ -70,9 +70,6 @@ Qué puede guardar cada tipo de almacenamiento:
 - **Clúster Proxmox real**: almacenamiento compartido (NFS o iSCSI) para discos, más ZFS local para datos rápidos.
 - **Backups largos**: idealmente un storage separado del de los discos para que un fallo no se lleve todo.
 
-## Pendiente en el día 5
+## Siguiente parte
 
-El día 5 del Módulo 4 incluye también los puntos 2 y 3, que se harán en otra sesión:
-
-- **Punto 2:** `vzdump` — crear backup de una VM, programarlo y configurar retención.
-- **Punto 3:** Restauración de backups con otro VMID.
+Los puntos 2 (backups con `vzdump`, programación y retención) y 3 (restauración) del Día 5 se desarrollan en el documento [4.2 Backup vzdump y restauración](ejercicio-4.2-backup-vzdump.md).
