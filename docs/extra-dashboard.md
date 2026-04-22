@@ -317,3 +317,105 @@ sudo systemctl start cron
 
 !!! note "Humor no documentado"
     Dicen los mayores que Servy tiene un 8º humor secreto que solo aparece cuando el uptime alcanza exactamente **42 días**: se pone negro y dice "La respuesta es obvia, pero aún no sabes formular la pregunta". No está en la tabla. No hace falta.
+
+### Versión 7 - Histórico persistente con SQLite (2026-04-22)
+
+Las versiones anteriores solo guardaban 30 muestras en memoria para las sparkline. Si la API se reiniciaba o querías ver qué pasó ayer, no había forma. En la v7 las métricas se persisten en una base de datos SQLite, con retención de **30 días** y gráfica interactiva de rangos extendidos.
+
+#### Esquema de la base de datos
+
+Fichero: `/var/lib/miapi/metrics.db` (SQLite con `journal_mode = WAL`).
+
+```sql
+CREATE TABLE metricas (
+    host  TEXT    NOT NULL,
+    ts    INTEGER NOT NULL,   -- epoch segundos
+    cpu   REAL,
+    ram   REAL,
+    disco REAL,
+    carga REAL,
+    PRIMARY KEY (host, ts)
+);
+CREATE INDEX idx_metricas_host_ts ON metricas(host, ts);
+```
+
+Una fila por host y por minuto. Con 4 hosts y una muestra/min: **5760 filas/día** (~2 MB/mes). El `PRIMARY KEY (host, ts)` evita duplicados si el sampler se solapa.
+
+#### Sampler: cada 60 segundos
+
+El servicio `miapi` ejecuta un `setInterval(sampleAllHosts, 60000)` que mide las 4 máquinas (local para cliente1, SSH para el resto) y las inserta. Solo se guardan **métricas ligeras** — las pesadas (procesos, conexiones, leases) se dejan en memoria.
+
+```javascript
+function sampleBasic(host) {
+    const cpu   = parseFloat(run(host, "top -bn1 | grep %Cpu | awk '{print $2}'"));
+    const mem   = run(host, "free -m | grep Mem").split(/\s+/);
+    const ram   = Math.round((parseInt(mem[2]) / parseInt(mem[1])) * 100);
+    const disco = parseFloat(run(host, "df / | tail -1 | awk '{print $5}' | tr -d %"));
+    const carga = parseFloat(run(host, "awk '{print $1}' /proc/loadavg"));
+    return { cpu, ram, disco, carga };
+}
+```
+
+#### Retención: 30 días
+
+Un `setInterval` diario borra filas antiguas:
+
+```javascript
+setInterval(() => {
+    const corte = Math.floor(Date.now() / 1000) - 30 * 86400;
+    db.prepare('DELETE FROM metricas WHERE ts < ?').run(corte);
+}, 86400000);
+```
+
+#### Endpoint nuevo
+
+```
+GET /api/historico?host=<id>&rango=<1h|24h|7d|30d>
+```
+
+Respuesta: array de puntos ordenados por tiempo.
+
+```json
+{
+  "host": "cliente1",
+  "rango": "1h",
+  "puntos": [
+    { "ts": 1776856112, "cpu": 5,  "ram": 18, "disco": 15, "carga": 0.17 },
+    { "ts": 1776856162, "cpu": 12, "ram": 17, "disco": 15, "carga": 0.27 },
+    ...
+  ]
+}
+```
+
+#### Frontend: gráfica con Chart.js
+
+Nueva card "Histórico extendido" con 3 botones de rango (**1h / 24h / 7d**). La gráfica combina las 4 métricas con doble eje Y:
+
+- **Eje izquierdo (%)**: CPU, RAM, Disco.
+- **Eje derecho**: Carga 1m (no es porcentaje, tiene su propia escala).
+
+Chart.js se carga desde CDN (`cdn.jsdelivr.net/npm/chart.js`). La gráfica se refresca automáticamente cada 60 s y al cambiar de host.
+
+![Histórico extendido con picos de stress-ng: CPU, RAM y Carga](img/dashboard-historico-v7.png)
+
+Captura del dashboard durante una sesión de `stress-ng`:
+
+1. Pico azul **CPU al 95%** — `stress-ng --cpu 4`.
+2. Seguido de pico morado **RAM al 85%** — `stress-ng --vm 1 --vm-bytes 1400M`.
+3. La carga naranja (eje derecho) sigue a ambos.
+4. Disco verde plano al 15% — no le afecta ninguno de los dos stresses.
+
+#### Dependencia nueva
+
+Se añadió `better-sqlite3` al `/opt/miapi` con `npm install`. Es una librería síncrona con bindings nativos en C++; al ser Proxmox anidado sin KVM la compilación tardó varios minutos.
+
+#### Ventajas sobre la v3
+
+| Aspecto | v3 (memoria) | v7 (SQLite) |
+|---------|--------------|-------------|
+| Historial | 30 muestras (5 min) | 43.200 muestras/host (30 días) |
+| Persistencia | Se pierde al reiniciar miapi | Sobrevive reinicios |
+| Rangos | Solo "últimos 5 min" | 1h / 24h / 7d / 30d |
+| Métricas | CPU, RAM | CPU, RAM, Disco, Carga |
+| Visualización | Sparkline simple (canvas) | Chart.js con tooltips y leyenda |
+| Tamaño en disco | 0 | ~2 MB/mes |
