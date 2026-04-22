@@ -479,19 +479,22 @@
     locked = true;
     prompt.style.display = 'none';
     var colores = ['#ff5555', '#ffb86c', '#f1fa8c', '#50fa7b', '#8be9fd', '#bd93f9', '#ff79c6'];
-    var pasos = 18;
+    var etiquetas = ['RED', 'ORANGE', 'YELLOW', 'GREEN', 'CYAN', 'PURPLE', 'PINK'];
+    var bloque = '';
+    for (var b = 0; b < 10; b++) bloque += '&#9608;';
+    var pasos = 20;
     var i = 0;
-    var original = term.style.color;
     function tick() {
       if (i >= pasos) {
-        term.style.color = original;
-        println('<span class="term-ok">La fiesta siempre acaba. back to work.</span>');
+        println('<span class="term-warn">La fiesta siempre acaba. back to work.</span>');
         unlock();
         return;
       }
-      term.style.color = colores[i % colores.length];
+      var c = colores[i % colores.length];
+      var t = etiquetas[i % etiquetas.length];
+      println('<span style="color:' + c + ';text-shadow:0 0 8px ' + c + 'bb">' + bloque + ' ~ ' + t + ' ~ ' + bloque + '</span>');
       i++;
-      setTimeout(tick, 160);
+      setTimeout(tick, 180);
     }
     tick();
     return true;

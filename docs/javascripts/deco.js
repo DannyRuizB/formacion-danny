@@ -241,6 +241,90 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(setupFlyingPolaroids, 300);
 });
 
+// ===== SECRETS =====
+
+(function() {
+    var s = document.createElement('style');
+    s.textContent = '@keyframes rainbow-hue { 0%{filter:hue-rotate(0)} 100%{filter:hue-rotate(360deg)} }';
+    document.head.appendChild(s);
+
+    console.log('%c  Servy is watching.  ', 'background:#1e1e2e;color:#9ece6a;font-family:monospace;font-size:14px;padding:6px 10px;border-radius:4px;border:1px solid #9ece6a');
+    console.log('%c  Hay secretos escondidos en este laboratorio. Buena suerte encontrandolos.', 'color:#bb9af7;font-style:italic;font-size:11px');
+
+    var seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    var idx = 0;
+    var clicks = 0;
+    var clickTimer = null;
+
+    function keyMatches(k, ref) {
+        if (!k || !ref) return false;
+        if (k === ref) return true;
+        // Fallback para navegadores antiguos: "Up" en vez de "ArrowUp"
+        var aliases = { 'Up': 'ArrowUp', 'Down': 'ArrowDown', 'Left': 'ArrowLeft', 'Right': 'ArrowRight' };
+        if (aliases[k] === ref) return true;
+        return (k.length === 1 && k.toLowerCase() === ref.toLowerCase());
+    }
+
+    document.addEventListener('keydown', function(e) {
+        var k = e.key;
+        if (keyMatches(k, seq[idx])) {
+            idx++;
+            if (idx === seq.length) {
+                idx = 0;
+                console.log('%c[konami] fiesta!', 'color:#bb9af7');
+                fiesta();
+            }
+        } else {
+            // Reset, pero si la tecla fallada es el primer paso, arrancar en 1
+            idx = keyMatches(k, seq[0]) ? 1 : 0;
+        }
+
+        if (e.ctrlKey && e.shiftKey && e.key && e.key.toLowerCase() === 'e') {
+            e.preventDefault();
+            flash('Eres de los que leen el codigo. Bienvenido al club.');
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target || e.target.tagName !== 'H1') return;
+        clicks++;
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(function() { clicks = 0; }, 1500);
+        if (clicks >= 7) {
+            clicks = 0;
+            e.target.style.animation = 'rainbow-hue 1.2s linear 4';
+            setTimeout(function() { e.target.style.animation = ''; }, 5000);
+        }
+    });
+
+    function fiesta() {
+        var chars = ['*','#','+','o','@','$','%','~','&'];
+        var colors = ['#7aa2f7','#bb9af7','#9ece6a','#e0af68','#f7768e','#7dcfff','#ff9e64'];
+        for (var i = 0; i < 90; i++) {
+            var p = document.createElement('div');
+            p.textContent = chars[Math.floor(Math.random() * chars.length)];
+            p.style.cssText = 'position:fixed;top:-40px;left:' + (Math.random() * 100) + '%;font-size:' + (16 + Math.random() * 22) + 'px;font-weight:bold;color:' + colors[Math.floor(Math.random() * colors.length)] + ';pointer-events:none;z-index:99999;transition:transform 3.2s linear, opacity 3.2s;';
+            document.body.appendChild(p);
+            (function(el, dx) {
+                setTimeout(function() {
+                    el.style.transform = 'translateY(' + (window.innerHeight + 80) + 'px) translateX(' + dx + 'px) rotate(' + (Math.random() * 720) + 'deg)';
+                    el.style.opacity = '0';
+                }, 10 + Math.random() * 300);
+                setTimeout(function() { el.remove(); }, 3600);
+            })(p, (Math.random() - 0.5) * 240);
+        }
+    }
+
+    function flash(msg) {
+        var o = document.createElement('div');
+        o.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);background:#1e1e2e;color:#7aa2f7;padding:14px 22px;border-radius:10px;border:1px solid #bb9af7;z-index:99999;font-family:monospace;box-shadow:0 4px 20px rgba(0,0,0,0.5);transition:opacity 1s;';
+        o.textContent = msg;
+        document.body.appendChild(o);
+        setTimeout(function() { o.style.opacity = '0'; }, 2800);
+        setTimeout(function() { o.remove(); }, 3900);
+    }
+})();
+
 // Navegacion instantanea de MkDocs Material
 var checkInterval = setInterval(function() {
     if (typeof location !== 'undefined') {
