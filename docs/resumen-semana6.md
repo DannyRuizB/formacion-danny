@@ -28,3 +28,7 @@ Dominar los conceptos de virtualizacion con Proxmox y contenedores con Docker.
 - Web Proxmox: `https://10.160.218.10:8080/`
 - SSH al nodo: `ssh servidor`
 - SSH a cliente1: `ssh wiki`
+
+!!! quote "Fortune cookie de cierre"
+    *"rm -rf no es un plan de recuperación."*  
+    Lección oficialmente interiorizada esta semana.

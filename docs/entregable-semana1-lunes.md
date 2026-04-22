@@ -21,3 +21,8 @@ ssh soltecsis@10.160.218.10
 - **Terminal:** Terminal de Ubuntu
 - **Editor:** VS Code
 - **Git:** Configurado
+
+## Tiempo invertido
+- Configuración del entorno local: **42 minutos**
+- Primer login SSH sin pedir contraseña: al segundo intento
+- Respuesta a la gran pregunta sobre DevOps: todavía en cálculo

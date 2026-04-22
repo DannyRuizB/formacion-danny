@@ -76,3 +76,6 @@ systemctl reload nginx
 - Toda la documentación del curso accesible desde el navegador
 - Servida por Nginx en el servidor de prácticas
 - Facil de actualizar: editar .md, rebuild y subir
+
+!!! tip "Recompensa"
+    Ver la wiki servida y funcionando es de esos momentos que piden una `beer`. Markdown → generador → Nginx → túnel SSH → navegador. Stack completo.

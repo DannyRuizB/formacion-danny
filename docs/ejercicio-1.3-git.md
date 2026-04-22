@@ -102,3 +102,6 @@ feature/x    ●───●───●
 - 6 commits realizados con mensajes descriptivos
 - Rama feature/semana1 creada, trabajada y mergeada a main
 - Este repositorio se usa durante todo el curso para los entregables
+
+!!! note "Dato friki"
+    El hash del segundo commit arriba empieza por `42` — La Respuesta a la Gran Pregunta. Todo sysadmin lee Douglas Adams tarde o temprano.

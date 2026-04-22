@@ -51,3 +51,7 @@ Antes de los ejercicios, se configuro la VM cliente1 (servidor) que no tenia int
 | cliente1 (VM 1002) | 10.160.218.20 | Debian 13 Trixie | Servidor |
 | cliente2 (VM 1003) | - | - | Cliente (sin configurar) |
 | debian13 (VM 1001) | - | - | No en uso |
+
+!!! quote "Dadjoke de la semana"
+    *"El DNS funciona. Siempre es el DNS. Nunca es el DNS. Siempre es el DNS."*  
+    (confirmado esta semana)

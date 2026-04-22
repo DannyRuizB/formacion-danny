@@ -85,3 +85,6 @@ deploy   ──┬─ backend        ──── puede escribir en /proyecto
 - deploy esta en ambos grupos (backend y frontend)
 - El directorio /proyecto pertenece a root:backend con permisos 775, solo backend puede escribir
 - Los usuarios que no estan en backend (como webadmin) solo pueden leer el contenido de /proyecto
+
+!!! note "Nota cultural"
+    Los permisos importan. Pero recuerda que incluso con `sudo`, si escribes `sudo make me a sandwich` sin más, el sistema no sabe quién tiene que traerlo. Referencia obligada a xkcd #149.

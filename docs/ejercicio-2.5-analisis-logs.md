@@ -89,3 +89,6 @@ EOF
 - Detectados intentos de login fallidos en auth.log (usuario "ana", 3 intentos)
 - Encontrados errores 404 en los logs de Nginx
 - Logrotate configurado para /var/log/monitor.log (rotación semanal, 4 copias, comprimido)
+
+!!! warning "Esto no es un simulacro"
+    Los intentos de login fallidos del ejercicio son benignos — una pulsación tuya. Un servidor expuesto a internet recibe intentos de `hack` reales cada pocos segundos. `fail2ban` existe por algo.

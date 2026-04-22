@@ -124,3 +124,6 @@ systemctl reload nginx
 - 4 problemas reales diagnosticados y resueltos durante la configuración del entorno
 - Metodologia aplicada: verificar conectividad → verificar servicios → verificar puertos → revisar logs
 - Documentado cada paso del diagnóstico y la solución
+
+!!! tip "Cuando nada funciona"
+    Si al 5º intento sigue sin arrancar, queda la opción nuclear del sysadmin: el clásico **table-flip** `(╯°□°)╯ ┻━┻`. Respirar, contar hasta 10 y volver al paso 1 del diagnóstico. Normalmente funciona.

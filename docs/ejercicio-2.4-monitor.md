@@ -84,3 +84,7 @@ Crontab configurado con las dos tareas (backup-disk-usage.sh y monitor.sh):
 - Monitoriza disco, RAM y servicios (nginx, ssh, cron)
 - Programado con cron para ejecutarse cada hora
 - Logs en /var/log/monitor.log
+
+!!! quote "Filosofía del monitor"
+    *"Un servidor feliz es un servidor bien monitorizado."*  
+    — fortune cookie de sysadmin

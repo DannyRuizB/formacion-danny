@@ -96,3 +96,6 @@ Así se accede a servicios remotos como si estuvieran en tu maquina local, sin e
 - Conexión al servidor de prácticas con `ssh wiki` (con tunel automático)
 - Acceso a wiki, web y dashboard desde el navegador local via el tunel
 - Toda la configuración en un solo fichero: `~/.ssh/config`
+
+!!! note "Host reservado"
+    En este `~/.ssh/config` queda hueco para un futuro `Host matrix` apuntando a la tercera VM de pruebas cuando exista. De momento vive como comentario mental.

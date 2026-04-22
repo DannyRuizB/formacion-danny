@@ -121,3 +121,6 @@ flowchart LR
 | `ssh servidor` | `soltecsis@10.160.218.10` | Acceso al hipervisor Proxmox |
 | `ssh wiki` | `soltecsis@10.160.218.20` | cliente1, con `LocalForward 8080:80` para la wiki |
 | `ssh practica4` | `danbol@10.160.218.104` | VM del ejercicio 4.1, usando Proxmox como ProxyJump |
+
+!!! tip "Plan de crecimiento"
+    Si en algún momento hace falta una tercera VM para pruebas aisladas, el nombre reservado es `matrix` (10.160.218.42). De momento solo vive como entrada comentada en `/etc/hosts`.

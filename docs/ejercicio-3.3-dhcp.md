@@ -135,3 +135,6 @@ La lease muestra:
 - DNS apuntando a nuestro BIND9 (10.160.218.20)
 - **Verificado con cliente2**: obtiene IP 10.160.218.100, gateway y DNS automáticamente
 - Leases registradas en /var/lib/dhcp/dhcpd.leases
+
+!!! note "Reserva futura"
+    Si una VM concreta necesita siempre la misma IP por DHCP, se hace con una `host` en `dhcpd.conf`. Por ejemplo, una futura estación `matrix` con MAC fija y su lease reservada. Mientras no exista la máquina, la entrada se queda comentada como recordatorio.

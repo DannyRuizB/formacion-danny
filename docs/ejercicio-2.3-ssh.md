@@ -80,3 +80,6 @@ Esto haria accesible el puerto 3000 del PC local como puerto 9090 en el servidor
 - Acceso rápido configurado con ~/.ssh/config
 - Servidor SSH securizado: sin root, sin contraseña, max 3 intentos
 - Túnel local SSH funcionando: acceso a Nginx remoto via localhost:8080
+
+!!! tip "Host ejemplo"
+    Si algún día el `~/.ssh/config` crece, conviene usar alias cortos: `servidor`, `wiki`, `matrix`... Todo sysadmin acaba teniendo un `Host matrix` en algún sitio, aunque solo sea por la broma.

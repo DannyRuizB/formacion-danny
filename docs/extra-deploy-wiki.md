@@ -42,3 +42,6 @@ wiki
 ```
 
 Genera el sitio con mkdocs, lo sube por SCP y lo activa en Nginx en un solo paso.
+
+!!! tip "Mejora tonta"
+    Si quieres un cierre solemne, pipea el último echo por `cowsay`: `echo "Wiki desplegada" | cowsay`. La vaca certifica el despliegue.

@@ -35,3 +35,7 @@
 - openssh-server instalado en VM cliente1 (servidor)
 - Nginx instalado en VM cliente1 (servidor)
 - Tuneles SSH completados (ver ejercicio-2.3)
+
+!!! quote
+    *"La paciencia es la virtud del que compila."*  
+    — fortune aleatoria de sysadmin

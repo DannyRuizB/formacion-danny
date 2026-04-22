@@ -43,3 +43,6 @@
 | Nodo Proxmox | 10.160.218.10 | Proxmox VE 8.4.17 | Hipervisor |
 | cliente1 (VM 1002) | 10.160.218.20 | Debian 13 Trixie | Servidor |
 | cliente2 (VM 1003) | - | - | Cliente (sin configurar) |
+
+!!! note "La vaca lo certifica"
+    Al cerrar la semana todo el stack del servidor estaba arriba. Un `cowsay "All services up"` solemne en el motd y a dormir.

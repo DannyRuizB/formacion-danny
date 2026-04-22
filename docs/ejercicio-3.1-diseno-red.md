@@ -87,3 +87,6 @@ Disenar una red con 3 VLANs (servidores, usuarios, gestión), incluyendo rangos 
 - IPs estáticas para servidores y gestión, DHCP para usuarios
 - Reglas de firewall para controlar tráfico entre VLANs
 - DNS centralizado en VLAN de servidores
+
+!!! tip "Reservada"
+    En el diseño queda hueco para una **VLAN 42** de pruebas — nombre reservado por si algún día aparece un laboratorio interno o un cluster K8s. Todo buen sysadmin deja una puerta de emergencia para ideas locas.

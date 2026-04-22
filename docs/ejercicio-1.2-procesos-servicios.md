@@ -119,3 +119,6 @@ Opciones útiles de journalctl:
 - Al pararlo, el puerto 80 deja de responder
 - Esta configurado para arrancar automáticamente al inicio (enabled)
 - Los logs muestran el historial de arranques y paradas del servicio
+
+!!! tip "Paquete bonus"
+    Ya que se está practicando `apt install`, algunos sysadmins instalan `cowsay` solo para personalizar el `motd` del servidor. `echo 'Disco lleno' | cowsay` nunca deja de ser útil.

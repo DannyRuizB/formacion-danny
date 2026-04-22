@@ -98,3 +98,6 @@ Ambos registros resuelven correctamente a 10.160.218.20:
 - BIND9 instalado y funcionando como servidor DNS
 - Zona "practicas.local" creada con registros A para web, db, mail y ns1
 - Verificado con dig: todos los registros resuelven a 10.160.218.20
+
+!!! tip "Para bromear"
+    Nada impide añadir un registro A `coffee.practicas.local` apuntando a la cafetera de la oficina (si tuviese IP). Un `dig coffee.practicas.local` sería la forma más geek de pedir un café.

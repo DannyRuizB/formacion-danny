@@ -32,3 +32,4 @@
 
 - El ejercicio 1.2 (Nginx) se realizo en la maquina local porque el servidor no tiene internet para instalar paquetes
 - El ejercicio 1.4 queda pendiente hasta tener acceso a las herramientas internas de Zataca
+- Métrica no oficial: coffee consumed = 7 tazas. Sin cafeína no hay SSH que valga.

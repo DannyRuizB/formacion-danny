@@ -73,3 +73,6 @@ Qué puede guardar cada tipo de almacenamiento:
 ## Siguiente parte
 
 Los puntos 2 (backups con `vzdump`, programación y retención) y 3 (restauración) del Día 5 se desarrollan en el documento [4.2 Backup vzdump y restauración](ejercicio-4.2-backup-vzdump.md).
+
+!!! note "Juego de palabras"
+    En español "disco" es tanto `/dev/sda` como una fiesta con luces de colores. Ambos se cuelgan si los sobrecargas. Para monitorizar el primero basta `df -h`; para el segundo, bajar el volumen.

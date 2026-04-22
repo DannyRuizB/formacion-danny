@@ -98,3 +98,6 @@ nslookup practicas.local
 - IP estática 10.160.218.20/24 configurada correctamente en ens18
 - Conectividad con el nodo Proxmox (10.160.218.10) verificada
 - Sin acceso a internet en el momento del ejercicio (resuelto posteriormente con entradas en /etc/hosts)
+
+!!! info "Dato de red"
+    El tamaño mínimo de una trama Ethernet útil es **42 bytes** (sin FCS). Un ping de 64 B gasta más cabecera que payload. La red no es gratis.

@@ -131,3 +131,8 @@ Desplegar la wiki con un solo comando: `wiki`
 </div>
 
 </div>
+
+---
+
+> *"Los backups son una religión. Los restores son el milagro."*  
+> — fortune cookie de sysadmin

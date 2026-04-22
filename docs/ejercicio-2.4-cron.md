@@ -96,3 +96,6 @@ Si el script no aparece en syslog, puede ser que cron no este activo (`systemctl
 - Registra fecha y uso de disco en /var/log/mis-scripts/disk-usage.log
 - Programado con cron para ejecutarse cada hora en punto (`0 * * * *`)
 - Se puede verificar la ejecución con `grep CRON /var/log/syslog`
+
+!!! tip "Crontab de los viernes"
+    Un clásico de oficina: `0 17 * * 5 echo "beer time"`. A las 17:00 de cada viernes el sysadmin oye *ping*. La pregunta filosófica es si el servidor también celebra.

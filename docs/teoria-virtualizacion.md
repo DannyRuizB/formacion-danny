@@ -207,3 +207,6 @@ Particularidad: el Proxmox de practicas **es a su vez una VM** dentro de otro Pr
 - Conocidos los principales hipervisores del mercado
 - Entendida la arquitectura de Proxmox VE (KVM + LXC + interfaz web)
 - Revisados los conceptos clave: templates, snapshots, backups, clones, HA, migracion
+
+!!! note "Guiño fuera de temario"
+    Todo sistema serio tiene atajos escondidos — los de Proxmox vienen en la doc oficial. Los míticos, tipo *Konami Code*, viven solo en wikis decoradas como ésta.

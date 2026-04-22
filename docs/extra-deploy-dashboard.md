@@ -101,3 +101,6 @@ dashboard
 - Valida que los ficheros existen antes de subir
 - Sube via /tmp para evitar problemas de permisos
 - Reinicia la API automáticamente
+
+!!! tip "Antes de flip-ear la mesa"
+    Si el deploy falla, repasar en orden: SSH → sudo → ruta destino → permisos. Normalmente es solo una. `(╯°□°)╯ ┻━┻` queda como último recurso.

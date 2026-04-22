@@ -340,6 +340,168 @@
   // Alias
   COMANDOS['cv'] = COMANDOS.about;
 
+  // Comandos secretos (no salen en help)
+  COMANDOS['42'] = function() {
+    locked = true;
+    prompt.style.display = 'none';
+    setTimeout(function() { println('<span class="term-dim">Pensando...</span>'); }, 200);
+    setTimeout(function() { println('<span class="term-dim">Pensando mucho...</span>'); }, 1200);
+    setTimeout(function() { println('<span class="term-dim">Pensando muchisimo...</span>'); }, 2400);
+    setTimeout(function() {
+      println('<span class="term-ok">La Respuesta a la Gran Pregunta de la Vida, el Universo y Todo.</span>');
+      unlock();
+    }, 3600);
+    return true;
+  };
+  COMANDOS.coffee = function() {
+    println('      ( (   ');
+    println('       ) )  ');
+    println('    ........');
+    println('    |      |]  <span class="term-warn">cafe servido</span>');
+    println('    \\      /');
+    println('     `----\'');
+  };
+  COMANDOS.cowsay = function(args) {
+    var msg = args.join(' ') || 'Muu!';
+    var bar = '';
+    for (var i = 0; i < msg.length + 2; i++) bar += '-';
+    println(' ' + bar);
+    println('< ' + escape(msg) + ' >');
+    println(' ' + bar);
+    println('        \\   ^__^');
+    println('         \\  (oo)\\_______');
+    println('            (__)\\       )\\/\\');
+    println('                ||----w |');
+    println('                ||     ||');
+  };
+  COMANDOS.fortune = function() {
+    var frases = [
+      'El mejor sysadmin es el que nunca hace falta.',
+      'Un servidor feliz es un servidor bien monitorizado.',
+      'No hay bug, solo funcionalidad no documentada.',
+      'Todo lo que puede fallar, fallara en produccion a las 3am.',
+      'grep -i amor /dev/null  # tambien sin resultados',
+      'sudo make me a sandwich  # Okay.',
+      'La paciencia es la virtud del que compila.',
+      'rm -rf no es un plan de recuperacion.',
+      'Los backups son una religion. Los restores son el milagro.'
+    ];
+    println('<span class="term-warn">' + escape(frases[Math.floor(Math.random() * frases.length)]) + '</span>');
+  };
+  COMANDOS.matrix = function() {
+    locked = true;
+    prompt.style.display = 'none';
+    var lines = 20;
+    var i = 0;
+    function tick() {
+      if (i >= lines) {
+        println('<span class="term-ok">La matrix te ha visto.</span>');
+        unlock();
+        return;
+      }
+      var line = '';
+      for (var j = 0; j < 60; j++) {
+        line += Math.random() < 0.35 ? String.fromCharCode(33 + Math.floor(Math.random() * 94)) : ' ';
+      }
+      println('<span class="term-ok">' + escape(line) + '</span>');
+      i++;
+      setTimeout(tick, 120);
+    }
+    tick();
+    return true;
+  };
+  COMANDOS.hack = function(args) {
+    var target = args[0] || '10.160.218.254';
+    locked = true;
+    prompt.style.display = 'none';
+    var pasos = [
+      '[*] Escaneando puertos en ' + target + '...',
+      '[+] Puerto 22/tcp abierto',
+      '[+] Puerto 80/tcp abierto',
+      '[*] Probando exploits...',
+      '[*] Bypass de firewall...',
+      '[*] Ejecutando payload...',
+      '[+] Shell remota obtenida',
+      '[!] Acceso root concedido'
+    ];
+    var i = 0;
+    function tick() {
+      if (i >= pasos.length) {
+        setTimeout(function() {
+          println('<span class="term-warn">...es broma, no has hackeado nada. Es una terminal simulada ;)</span>');
+          unlock();
+        }, 800);
+        return;
+      }
+      println('<span class="term-dim">' + escape(pasos[i]) + '</span>');
+      i++;
+      setTimeout(tick, 500 + Math.random() * 400);
+    }
+    tick();
+    return true;
+  };
+  COMANDOS.sudo = function(args) {
+    if (args[0] === 'make' && args[1] === 'me' && args[2] === 'a' && args[3] === 'sandwich') {
+      println('<span class="term-warn">Okay.</span>');
+      println('<span class="term-dim">(referencia obligatoria a xkcd)</span>');
+      return;
+    }
+    println('sudo: solo funciona para ciertos comandos aqui', 'term-error');
+  };
+  COMANDOS.beer = function() {
+    println('   oO Oo                 ');
+    println('    oOo                   ');
+    println('   .-=-.                  ');
+    println('   |~~~|                  ');
+    println('   |~~~|    <span class="term-warn">Una birra fria.</span>');
+    println('   |~~~|    <span class="term-dim">Sysadmin mode: offline.</span>');
+    println('   \'---\'                  ');
+  };
+  COMANDOS.flip = function(args) {
+    var item = args.join(' ') || 'mesa';
+    println('(&#9583;&deg;&#9633;&deg;)&#9583;&#65077; &#9531;&#9473;&#9531;');
+    println('<span class="term-warn">&iexcl;' + escape(item.toUpperCase()) + ' VOLTEADA!</span>');
+    println('<span class="term-dim">respira, cuenta hasta 10, vuelve a intentarlo.</span>');
+  };
+  COMANDOS.dadjoke = function() {
+    var chistes = [
+      'Hay 10 tipos de personas: las que entienden binario y las que no.',
+      'Un paquete UDP entra en un bar. El bar no acusa recibo.',
+      '99 bugs en el codigo, 99 bugs. Arreglas uno, compilas otra vez, 127 bugs en el codigo.',
+      'Un SSH y un SFTP entran en un puerto. El 22 los saluda.',
+      'El DNS funciona. Siempre es el DNS. Nunca es el DNS. Siempre es el DNS.',
+      'Mi script funciona en mi maquina. Te presto mi maquina.',
+      'Los ingenieros cuentan desde 0 porque no quieren empezar con problemas.'
+    ];
+    println('<span class="term-warn">' + escape(chistes[Math.floor(Math.random() * chistes.length)]) + '</span>');
+  };
+  COMANDOS.disco = function() {
+    locked = true;
+    prompt.style.display = 'none';
+    var colores = ['#ff5555', '#ffb86c', '#f1fa8c', '#50fa7b', '#8be9fd', '#bd93f9', '#ff79c6'];
+    var pasos = 18;
+    var i = 0;
+    var original = term.style.color;
+    function tick() {
+      if (i >= pasos) {
+        term.style.color = original;
+        println('<span class="term-ok">La fiesta siempre acaba. back to work.</span>');
+        unlock();
+        return;
+      }
+      term.style.color = colores[i % colores.length];
+      i++;
+      setTimeout(tick, 160);
+    }
+    tick();
+    return true;
+  };
+  COMANDOS.konami = function() {
+    println('<span class="term-warn">El codigo Konami vive fuera de esta terminal.</span>');
+    println('<span class="term-dim">Pulsa &uarr;&uarr;&darr;&darr;&larr;&rarr;&larr;&rarr;BA en cualquier pagina de la wiki.</span>');
+    println('<span class="term-dim">(pista: necesitas el foco fuera de la terminal)</span>');
+  };
+
   function runCommand(raw) {
     var trimmed = raw.trim();
     if (!trimmed) return;

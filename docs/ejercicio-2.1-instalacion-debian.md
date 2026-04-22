@@ -92,3 +92,6 @@ usermod -aG sudo soltecsis
 - Usuario soltecsis con permisos sudo
 - Acceso SSH verificado
 - Servidor listo para configurar red (ejercicio 2.2) y servicios
+
+!!! tip "Pausa recomendada"
+    La instalación del sistema base dura lo justo para preparar un coffee. Aprovecha ese rato — va a ser difícil tener tanto tiempo libre una vez que los servicios estén en producción.

@@ -174,3 +174,6 @@ Acceso a `http://miweb.practicas.local:8080/api` desde el navegador:
 - API Express con Node.js en puerto 3000 (endpoints /api y /api/info)
 - Nginx como reverse proxy redirige /api a Node.js
 - Todo accesible desde PC local via tunel SSH
+
+!!! warning "Lo que verás en los logs"
+    Un `tail -f /var/log/nginx/*-access.log` en un servidor público revela un chorro de bots escaneando rutas raras: `/wp-admin`, `/.env`, `/admin.php`... Cada uno es un intento de `hack` automatizado. Por eso se registran y se filtran con fail2ban.

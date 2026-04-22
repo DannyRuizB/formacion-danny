@@ -277,3 +277,6 @@ El sistema ha vuelto exactamente al estado del snapshot `limpio`.
 - **Rollback**: aplicar un snapshot sobrescribiendo el estado actual (operacion destructiva del estado posterior).
 - **Virtualizacion anidada**: limitaciones al ejecutar un hipervisor dentro de otro (sin VT-x anidado obliga a emular la CPU, tipo `qemu64`).
 - **ProxyJump (`-J`)**: tuneliza SSH a traves de un host intermedio; util para llegar a maquinas de redes internas.
+
+!!! note "Pausa cultural"
+    Este ejercicio tiene `sudo` por todas partes. Si a media mañana te pones a probar cosas raras con sudo, no olvides el clásico `sudo make me a sandwich` — xkcd #149. La máquina no responde, pero la gente mayor de 30 sí.

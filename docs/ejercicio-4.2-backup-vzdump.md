@@ -297,3 +297,7 @@ Con esto queda cubierto el Día 5 del Módulo 4:
 - [x] Tipos de almacenamiento (parte 1)
 - [x] Backups: vzdump, programación, retención
 - [x] Restauración de backups
+
+!!! quote "Dadjoke de cierre"
+    *"Los backups son una religión. Los restores son el milagro."*  
+    Hoy hemos tenido ambos.

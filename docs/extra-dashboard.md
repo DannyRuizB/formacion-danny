@@ -314,3 +314,6 @@ sudo systemctl stop cron
 # ...ver Servy rojo temblando...
 sudo systemctl start cron
 ```
+
+!!! note "Humor no documentado"
+    Dicen los mayores que Servy tiene un 8º humor secreto que solo aparece cuando el uptime alcanza exactamente **42 días**: se pone negro y dice "La respuesta es obvia, pero aún no sabes formular la pregunta". No está en la tabla. No hace falta.
