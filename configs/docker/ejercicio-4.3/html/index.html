@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 4.3 - Primer contenedor Nginx</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+      background: #1a1b26;
+      color: #c0caf5;
+    }
+    .card {
+      background: #24283b;
+      border: 1px solid #414868;
+      border-radius: 8px;
+      padding: 2rem 3rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      max-width: 640px;
+    }
+    h1 { color: #7aa2f7; margin-top: 0; }
+    code {
+      background: #1a1b26;
+      color: #f7768e;
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+    }
+    .ok { color: #9ece6a; font-weight: bold; }
+    footer {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #565f89;
+      border-top: 1px solid #414868;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Ejercicio 4.3</h1>
+    <p>Esta pagina se sirve desde un contenedor <strong>Nginx</strong> ejecutandose en <code>cliente1</code> sobre el puerto <code>8081</code> del anfitrion.</p>
+    <p>El fichero <code>index.html</code> se monta en el contenedor mediante un <em>bind mount</em> hacia <code>/usr/share/nginx/html/</code>, el directorio que Nginx sirve por defecto.</p>
+    <p class="ok">Si lees esto, el primer contenedor del modulo 4 funciona correctamente.</p>
+    <footer>
+      Curso FCT Zataca - Modulo 4 - Semana 7 - Docker fundamentos
+    </footer>
+  </div>
+</body>
+</html>

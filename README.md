@@ -45,3 +45,11 @@
 - Ejercicio de tuneles SSH
 - Ejercicio 1.2 en el servidor (repetir)
 - Resolver DNS
+
+## Progreso Semana 7 (Modulo 4 parte 2: Docker)
+
+- [x] Teoria de Docker (imagen, contenedor, registro, volumen, red)
+- [x] Ejercicio 4.3: Nginx con HTML personalizada en cliente1:8081
+- [x] Ejercicio 4.3: PostgreSQL con volumen persistente y verificacion `docker rm` + `docker run`
+- [x] Dockerfile multi-stage con usuario no-root para app Node.js
+- [x] Ejercicio 4.4: stack Compose (Postgres + Node + Nginx reverse proxy) en cliente1:8082

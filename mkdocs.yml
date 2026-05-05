@@ -72,10 +72,14 @@ nav:
     - 3.5 Troubleshooting: ejercicio-3.5-troubleshooting.md
   - Modulo 4 - Virtualizacion y contenedores:
     - Resumen Semana 6: resumen-semana6.md
+    - Resumen Semana 7: resumen-semana7.md
     - Teoria - Virtualizacion: teoria-virtualizacion.md
+    - Teoria - Docker: teoria-docker.md
     - 4.1 Crear VM en Proxmox: ejercicio-4.1-vm-proxmox.md
     - 4.2 Almacenamiento: ejercicio-4.2-almacenamiento.md
     - 4.2 Backup vzdump y restauracion: ejercicio-4.2-backup-vzdump.md
+    - 4.3 Primeros contenedores Docker: ejercicio-4.3-docker-contenedores.md
+    - 4.4 Stack con Docker Compose: ejercicio-4.4-docker-compose.md
   - Extras:
     - Wiki de documentacion: extra-wiki.md
     - Dashboard de monitorizacion: extra-dashboard.md
