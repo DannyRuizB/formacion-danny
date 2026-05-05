@@ -189,7 +189,7 @@
         { nombre: 'Modulo 1 - Introduccion', pct: 100 },
         { nombre: 'Modulo 2 - Administracion', pct: 100 },
         { nombre: 'Modulo 3 - Redes y servicios', pct: 100 },
-        { nombre: 'Modulo 4 - Virtualizacion', pct: 40 },
+        { nombre: 'Modulo 4 - Virtualizacion y contenedores', pct: 100 },
         { nombre: 'Modulo 5-8 - Pendientes', pct: 0 }
       ];
       println('<span class="term-ok">=== Progreso FCT ===</span>');
@@ -234,7 +234,7 @@
         '<span class="term-ok">CPU:</span> qemu64 (4) @ 2.4GHz',
         '<span class="term-ok">Memoria:</span> 512 / 2048 MB',
         '<span class="term-ok">Red:</span> 10.160.218.20/24',
-        '<span class="term-ok">FCT:</span> Modulo 4 - 65% completo'
+        '<span class="term-ok">FCT:</span> Modulos 1-4 completos'
       ];
       for (var i = 0; i < Math.max(art.length, info.length); i++) {
         var a = art[i] || '                           ';
