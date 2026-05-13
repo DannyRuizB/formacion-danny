@@ -38,7 +38,7 @@ Tutor: Adrian Rodrigo Melon Gutte
 | :material-check-circle:{ .green } | 2. Administración de sistemas operativos | 2-3 | **Completado** |
 | :material-check-circle:{ .green } | 3. Redes y servicios | 4-5 | **Completado** |
 | :material-check-circle:{ .green } | 4. Virtualización y contenedores | 6-7 | **Completado** |
-| :material-circle-outline:{ .pending } | 5. Bases de datos | 7-8 | Pendiente |
+| :material-check-circle:{ .green } | 5. Bases de datos | 7-8 | **Completado** |
 | :material-circle-outline:{ .pending } | 6. Seguridad | 8-9 | Pendiente |
 | :material-circle-outline:{ .pending } | 7. Automatización y documentación | 9-10 | Pendiente |
 | :material-circle-outline:{ .pending } | 8. Proyecto final | 10-12 | Pendiente |
