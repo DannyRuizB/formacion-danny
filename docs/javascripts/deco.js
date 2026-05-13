@@ -233,12 +233,60 @@ function setupScrollAnimations() {
     }
 }
 
+// ===== TYPEWRITER EN H1 (CSS-first, inmune a re-renders de Material) =====
+
+(function() {
+    var s = document.createElement('style');
+    s.textContent =
+        '.h1-tw { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; max-width: 100%; ' +
+            'border-right: 0.1em solid currentColor; width: 0; ' +
+            'animation: tw-typing var(--tw-duration, 1.5s) steps(var(--tw-steps, 30)) forwards, tw-blink 0.7s step-end infinite; }' +
+        '.h1-tw.tw-done { border-right: 0; animation: tw-typing var(--tw-duration, 1.5s) steps(var(--tw-steps, 30)) forwards; }' +
+        '@keyframes tw-typing { from { width: 0; } to { width: 100%; } }' +
+        '@keyframes tw-blink { 50% { border-color: transparent; } }';
+    document.head.appendChild(s);
+})();
+
+function typewriterH1() {
+    var h1 = document.querySelector('.md-content h1');
+    if (!h1) return;
+    // Idempotente: si ya tiene wrap animado, no hacer nada
+    if (h1.querySelector('.h1-tw')) return;
+
+    var full = (h1.textContent || '').trim();
+    if (!full || full.length > 120) return;
+
+    h1.setAttribute('aria-label', full);
+
+    // Preservar el permalink anchor (¶) si existe, para re-adjuntarlo después
+    var anchor = h1.querySelector('a.headerlink');
+    h1.textContent = '';
+
+    var wrap = document.createElement('span');
+    wrap.className = 'h1-tw';
+    wrap.style.setProperty('--tw-steps', full.length);
+    wrap.style.setProperty('--tw-duration', Math.min(2.4, full.length * 0.045) + 's');
+    wrap.textContent = full;
+
+    wrap.addEventListener('animationend', function(e) {
+        if (e.animationName === 'tw-typing') wrap.classList.add('tw-done');
+    });
+
+    h1.appendChild(wrap);
+    if (anchor) h1.appendChild(anchor);
+}
+
+function resetTypewriter() {
+    // Al cambiar de página, nada que resetear: la guardia es la presencia de .h1-tw en el nuevo h1.
+}
+
 // ===== INICIALIZACION =====
 
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(buildDecorations, 200);
     setTimeout(setupScrollAnimations, 250);
     setTimeout(setupFlyingPolaroids, 300);
+    setTimeout(typewriterH1, 150);
 });
 
 // ===== SECRETS =====
@@ -332,9 +380,11 @@ var checkInterval = setInterval(function() {
         setInterval(function() {
             if (window.location.pathname !== lastPath) {
                 lastPath = window.location.pathname;
+                resetTypewriter();
                 setTimeout(buildDecorations, 300);
                 setTimeout(setupScrollAnimations, 350);
                 setTimeout(setupFlyingPolaroids, 400);
+                setTimeout(typewriterH1, 250);
             }
         }, 500);
         clearInterval(checkInterval);
