@@ -85,6 +85,9 @@ nav:
     - Teoria - PostgreSQL: teoria-postgresql.md
     - Teoria - MariaDB: teoria-mariadb.md
     - 5.1 Inventario de servidores: ejercicio-5.1-inventario.md
+  - Modulo 6 - Seguridad:
+    - Resumen Semana 9: resumen-semana9.md
+    - Teoria - Seguridad: teoria-seguridad.md
   - Extras:
     - Wiki de documentacion: extra-wiki.md
     - Dashboard de monitorizacion: extra-dashboard.md

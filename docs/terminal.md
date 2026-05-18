@@ -190,7 +190,9 @@
         { nombre: 'Modulo 2 - Administracion', pct: 100 },
         { nombre: 'Modulo 3 - Redes y servicios', pct: 100 },
         { nombre: 'Modulo 4 - Virtualizacion y contenedores', pct: 100 },
-        { nombre: 'Modulo 5-8 - Pendientes', pct: 0 }
+        { nombre: 'Modulo 5 - Bases de datos', pct: 100 },
+        { nombre: 'Modulo 6 - Seguridad', pct: 100 },
+        { nombre: 'Modulo 7-8 - Pendientes', pct: 0 }
       ];
       println('<span class="term-ok">=== Progreso FCT ===</span>');
       println('&nbsp;');
