@@ -1,0 +1,10 @@
+---
+# Credenciales y BD de demo del Ejercicio 7.1. Para producción se sobreescriben
+# desde un fichero cifrado con `ansible-vault` (no en plain text en el repo).
+db_name: demoapp
+db_user: demoapp
+db_password: cambia_esto_en_produccion
+
+# Path del pg_hba en Debian 13 con PostgreSQL 17. Si cambiase la versión, se
+# ajusta esta variable.
+pg_hba_path: /etc/postgresql/17/main/pg_hba.conf

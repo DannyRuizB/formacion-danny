@@ -1,0 +1,10 @@
+---
+# Playbook top-level que aplica el rol `webserver` a los hosts del grupo
+# `webservers` del inventario. Misma funcionalidad que setup-servidor.yml
+# del Día 2-3, refactorizada en rol para mostrar la estructura del Día 4.
+
+- name: Configurar servidor web
+  hosts: webservers
+  become: yes
+  roles:
+    - webserver

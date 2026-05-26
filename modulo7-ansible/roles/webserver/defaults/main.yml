@@ -1,0 +1,11 @@
+---
+# Valores por defecto del rol webserver. Sobreescribibles desde el playbook
+# que invoque el rol (`vars:` del play o `vars:` del role include).
+paquetes:
+  - nginx
+  - curl
+  - htop
+  - ufw
+
+domain: demo.practicas.local
+web_root: /var/www/html

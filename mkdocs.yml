@@ -88,6 +88,10 @@ nav:
   - Modulo 6 - Seguridad:
     - Resumen Semana 9: resumen-semana9.md
     - Teoria - Seguridad: teoria-seguridad.md
+  - Modulo 7 - Automatizacion:
+    - Resumen Semana 10: resumen-semana10.md
+    - Teoria - Ansible: teoria-ansible.md
+    - 7.1 Playbook Nginx + PostgreSQL: ejercicio-7.1-ansible.md
   - Extras:
     - Wiki de documentacion: extra-wiki.md
     - Dashboard de monitorizacion: extra-dashboard.md

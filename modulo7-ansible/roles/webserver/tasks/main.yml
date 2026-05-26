@@ -1,0 +1,35 @@
+---
+- name: Actualizar cache de apt
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Instalar paquetes
+  ansible.builtin.apt:
+    name: "{{ paquetes }}"
+    state: present
+
+- name: Configurar UFW — permitir SSH
+  community.general.ufw:
+    rule: allow
+    port: "22"
+    proto: tcp
+
+- name: Configurar UFW — permitir HTTP
+  community.general.ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+
+- name: Habilitar UFW
+  community.general.ufw:
+    state: enabled
+
+- name: Copiar config Nginx (sites-available/default, demo)
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reiniciar Nginx

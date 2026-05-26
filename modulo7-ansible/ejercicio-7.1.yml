@@ -1,0 +1,26 @@
+---
+# Ejercicio 7.1 del Módulo 7: playbook que instala y configura Nginx +
+# PostgreSQL en cliente1, con variables para el dominio y las credenciales
+# de la BD, y handlers que recargan los servicios cuando la config cambia.
+#
+# Probar con --check antes:
+#   ansible-playbook ejercicio-7.1.yml --check --diff
+# Aplicar:
+#   ansible-playbook ejercicio-7.1.yml --diff
+
+- name: Ejercicio 7.1 — Nginx + PostgreSQL
+  hosts: webservers
+  become: yes
+
+  vars:
+    # Sobreescribibles del rol webserver
+    domain: demoapp.practicas.local
+    web_root: /var/www/demoapp
+    # Sobreescribibles del rol postgres
+    db_name: demoapp
+    db_user: demoapp
+    db_password: "demo_{{ ansible_hostname }}_2026"
+
+  roles:
+    - webserver
+    - postgres

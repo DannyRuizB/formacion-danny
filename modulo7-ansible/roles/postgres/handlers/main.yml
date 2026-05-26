@@ -1,0 +1,8 @@
+---
+# Recargar (no reiniciar) para que las conexiones activas a las BDs productivas
+# `practicas` e `inventario` no se vean afectadas. `reload` basta para que
+# PostgreSQL relea pg_hba.conf y postgresql.conf.
+- name: Recargar PostgreSQL
+  ansible.builtin.service:
+    name: postgresql
+    state: reloaded

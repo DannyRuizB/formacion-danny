@@ -1,0 +1,65 @@
+---
+# Playbook de ejemplo del Módulo 7 (Día 2-3) — replica el del doc del curso.
+# Instala paquetes, configura UFW (allow SSH + HTTP), suelta un site nginx de
+# demo en sites-available/default (que está desconectado en cliente1, no afecta
+# a wiki / miweb / dashboard) y reinicia nginx mediante un handler.
+#
+# Probar siempre primero con --check --diff:
+#   ansible-playbook setup-servidor.yml --check --diff
+# Aplicar de verdad:
+#   ansible-playbook setup-servidor.yml --diff
+
+- name: Configurar servidor web
+  hosts: webservers
+  become: yes
+
+  vars:
+    paquetes:
+      - nginx
+      - curl
+      - htop
+      - ufw
+    domain: demo.practicas.local
+    web_root: /var/www/html
+
+  tasks:
+    - name: Actualizar cache de apt
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Instalar paquetes
+      ansible.builtin.apt:
+        name: "{{ paquetes }}"
+        state: present
+
+    - name: Configurar UFW — permitir SSH
+      community.general.ufw:
+        rule: allow
+        port: "22"
+        proto: tcp
+
+    - name: Configurar UFW — permitir HTTP
+      community.general.ufw:
+        rule: allow
+        port: "80"
+        proto: tcp
+
+    - name: Habilitar UFW
+      community.general.ufw:
+        state: enabled
+
+    - name: Copiar config Nginx (sites-available/default, demo)
+      ansible.builtin.template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/sites-available/default
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Reiniciar Nginx
+
+  handlers:
+    - name: Reiniciar Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted

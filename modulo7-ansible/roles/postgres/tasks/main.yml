@@ -1,0 +1,49 @@
+---
+# Necesario para que los módulos community.postgresql.* puedan hablar con
+# PostgreSQL desde Python. En Debian 13 el paquete es python3-psycopg2.
+- name: Instalar dependencia python para PostgreSQL
+  ansible.builtin.apt:
+    name: python3-psycopg2
+    state: present
+
+# Las tareas postgresql_db/user/privs se ejecutan como el usuario unix
+# `postgres` (peer auth) — único modo que no requiere password aún sin estar
+# configurado.
+- name: Crear BD {{ db_name }} si no existe
+  community.postgresql.postgresql_db:
+    name: "{{ db_name }}"
+    state: present
+  become: yes
+  become_user: postgres
+
+- name: Crear usuario {{ db_user }} con password
+  community.postgresql.postgresql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    state: present
+  become: yes
+  become_user: postgres
+
+- name: Conceder ALL PRIVILEGES de {{ db_name }} a {{ db_user }}
+  community.postgresql.postgresql_privs:
+    db: "{{ db_name }}"
+    type: database
+    privs: ALL
+    roles: "{{ db_user }}"
+    state: present
+  become: yes
+  become_user: postgres
+
+# Añade una rule en pg_hba.conf para que el user demoapp se autentique con
+# password vía md5/scram local. blockinfile usa un marker idempotente y no
+# toca el resto del fichero — las rules existentes (user danny, etc.) quedan
+# intactas.
+- name: Permitir login local de {{ db_user }} en pg_hba.conf
+  ansible.builtin.blockinfile:
+    path: "{{ pg_hba_path }}"
+    marker: "# {mark} ANSIBLE MANAGED demoapp rule"
+    block: |
+      local   {{ db_name }}   {{ db_user }}                              scram-sha-256
+      host    {{ db_name }}   {{ db_user }}   127.0.0.1/32               scram-sha-256
+    insertafter: '^# TYPE'
+  notify: Recargar PostgreSQL
