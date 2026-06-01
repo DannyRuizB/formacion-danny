@@ -4,9 +4,24 @@ Guion de apoyo para la presentacion del proyecto ante el tutor (viernes 5 de
 junio). Las slides estan en formato **Marp** en el repo, fuera de la wiki:
 `presentacion/modulo8-slides.md`.
 
-## Como exportar las slides
+## Las slides
 
-Las slides son un markdown Marp. Para generar el PDF o el PPTX:
+El **PDF listo para presentar** ya esta generado en el repo:
+`presentacion/modulo8-slides.pdf` (13 slides, formato 16:9). Si solo quieres
+presentar, abre ese PDF a pantalla completa y listo.
+
+Hay dos fuentes editables de las slides:
+
+- `presentacion/modulo8-slides.html` — version HTML autocontenida. El PDF se
+  genero a partir de ella con Chrome:
+  ```bash
+  google-chrome --headless --no-pdf-header-footer \
+    --print-to-pdf=modulo8-slides.pdf modulo8-slides.html
+  ```
+- `presentacion/modulo8-slides.md` — version Marp (mismas slides), util si
+  prefieres editar en markdown y exportar a **PPTX** para PowerPoint.
+
+### Exportar la version Marp (si la prefieres)
 
 === "VSCode"
 
