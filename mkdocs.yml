@@ -93,7 +93,13 @@ nav:
     - Teoria - Ansible: teoria-ansible.md
     - 7.1 Playbook Nginx + PostgreSQL: ejercicio-7.1-ansible.md
   - Modulo 8 - Proyecto Final:
+    - Resumen Semanas 11-12: resumen-semana11-12.md
     - Fase 1 - Planificacion: modulo8-planificacion.md
+    - Arquitectura: modulo8-arquitectura.md
+    - Instalacion: modulo8-instalacion.md
+    - Operacion: modulo8-operacion.md
+    - Troubleshooting: modulo8-troubleshooting.md
+    - Presentacion: modulo8-presentacion.md
   - Extras:
     - Wiki de documentacion: extra-wiki.md
     - Dashboard de monitorizacion: extra-dashboard.md
