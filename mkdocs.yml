@@ -92,6 +92,8 @@ nav:
     - Resumen Semana 10: resumen-semana10.md
     - Teoria - Ansible: teoria-ansible.md
     - 7.1 Playbook Nginx + PostgreSQL: ejercicio-7.1-ansible.md
+  - Modulo 8 - Proyecto Final:
+    - Fase 1 - Planificacion: modulo8-planificacion.md
   - Extras:
     - Wiki de documentacion: extra-wiki.md
     - Dashboard de monitorizacion: extra-dashboard.md
